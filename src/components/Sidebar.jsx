@@ -63,7 +63,7 @@ const Sidebar = ({ selectedItems }) => {
       )}
 
       {/* ✅ Total Price Section */}
-      <hr style={{ margin: "15px 0" }} />
+      {/* <hr style={{ margin: "15px 0" }} /> */}
       <div className="total-section">
         <h4>Total Price: ₹{totalPrice}</h4>
       </div>
