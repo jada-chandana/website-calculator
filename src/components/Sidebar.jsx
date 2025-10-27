@@ -1,5 +1,6 @@
 import React from "react";
 import "./Sidebar.css";
+import SpecialRequirements from "./SpecialRequirements";
 
 const Sidebar = ({ selectedItems }) => {
   // ✅ Calculate total for domains (array)
@@ -43,6 +44,7 @@ const Sidebar = ({ selectedItems }) => {
               </li>
             ))}
           </ul>
+          {SpecialRequirements.requirement && selectedRequirements.requirements.length}
         </div>
       )}
 
