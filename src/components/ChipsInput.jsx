@@ -55,7 +55,7 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
 
   return (
     <div className="main-container">
-      <h3 className="sub">Pages</h3>
+      <h3 className="su">Pages</h3>
 
       {/* Input for adding custom chips */}
       <input
