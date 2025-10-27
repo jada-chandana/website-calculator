@@ -2,10 +2,18 @@ import React from "react";
 import "./Sidebar.css";
 
 const Sidebar = ({ selectedItems }) => {
-  // ✅ Calculate total price safely (if some are undefined)
+  // ✅ Calculate total for domains (array)
+  const domainTotal = Array.isArray(selectedItems.domain)
+    ? selectedItems.domain.reduce(
+        (sum, item) => sum + (item.price ? Number(item.price) : 0),
+        0
+      )
+    : 0;
+
+  // ✅ Final total price
   const totalPrice =
     (selectedItems.type?.price ? Number(selectedItems.type.price) : 0) +
-    (selectedItems.domain?.price ? Number(selectedItems.domain.price) : 0) +
+    domainTotal +
     (selectedItems.pages?.price ? Number(selectedItems.pages.price) : 0);
 
   return (
@@ -23,25 +31,27 @@ const Sidebar = ({ selectedItems }) => {
       )}
 
       {/* Domain */}
-     {selectedItems.domain && selectedItems.domain.length > 0 && (
-  <div>
-    <p><strong>Selected Domains:</strong></p>
-    <ul>
-      {selectedItems.domain.map((d, i) => (
-        <li key={i}>
-          {d.name} — ₹{d.price}
-        </li>
-      ))}
-    </ul>
-  </div>
-)}
-
+      {selectedItems.domain && selectedItems.domain.length > 0 && (
+        <div>
+          <p>
+            <strong>Selected Domains:</strong>
+          </p>
+          <ul>
+            {selectedItems.domain.map((d, i) => (
+              <li key={i}>
+                {d.name} — ₹{d.price}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* Pages */}
       {selectedItems.pages && (
         <div>
           <p>
-            <strong>Pages:</strong> {selectedItems.pages.name}</p>
+            <strong>Pages:</strong> {selectedItems.pages.name}
+          </p>
           <p>₹{selectedItems.pages.price}</p>
         </div>
       )}
@@ -63,7 +73,6 @@ const Sidebar = ({ selectedItems }) => {
       )}
 
       {/* ✅ Total Price Section */}
-      {/* <hr style={{ margin: "15px 0" }} /> */}
       <div className="total-section">
         <h4>Total Price: ₹{totalPrice}</h4>
       </div>

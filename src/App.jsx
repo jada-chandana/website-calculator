@@ -5,6 +5,7 @@ import Type from "./components/Type";
 import Domain from "./components/Domain";
 import Sidebar from "./components/Sidebar";
 import Pages from "./components/NumberOfPages";
+import Special from "./components/SpecialRequirements";
 
 function App() {
   const [selectedItems, setSelectedItems] = useState({
@@ -45,7 +46,13 @@ function App() {
                 />
               }
             />
+         <Route
+  path="/nextPages"
+  element={<Special />}
+/>
+  
           </Routes>
+
         </div>
 
         {/* Sidebar visible on all pages */}

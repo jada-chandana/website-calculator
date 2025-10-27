@@ -34,7 +34,7 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
               padding: "15px",
               marginBottom: "10px",
               display: "flex",
-              flexDirection: "column", // ✅ Stacked vertically
+              flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
               gap: "6px",
@@ -46,7 +46,6 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
             }}
           >
             <p className="type-name">{item.name}</p>
-           
           </li>
         ))}
       </ul>
@@ -59,7 +58,7 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         <NavLink className="next" to="/">
           Previous
         </NavLink>
-        <NavLink className="next" to="/nextpage">
+        <NavLink className="next" to="/nextPages">
           Next
         </NavLink>
       </div>
