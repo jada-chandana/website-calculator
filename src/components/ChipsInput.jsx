@@ -20,6 +20,23 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
     "Enquiry",
     "Get a Quote",
     "Blog",
+    "vision page",
+    "Mission page",
+    "Team",
+    "Faqs",
+    "News",
+    "Events",
+    "Awards",
+    "Achievement",
+    "CSR",
+    "Terms & Conditions",
+    "Privacy Policy",
+    "Refund Policy",
+    "Cancellation Policy",
+    "Studies",
+    "Industries",
+    "Site Map",
+    "Complaint",
   ];
 
   // ✅ Update parent (Sidebar)
