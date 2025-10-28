@@ -1,7 +1,7 @@
 import React from "react";
 import chatbot from "../assets/chatbot.png"; 
 import Banner from "../assets/banner.png";
-import chat from "../assets/Whatsapp.png";
+import chat from "../assets/whatsapp.png";
 import payment from "../assets/payments.png";
 import sms from "../assets/smsApi.png"; 
 import { NavLink } from "react-router";
