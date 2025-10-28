@@ -141,6 +141,12 @@ html, body {
 .next:hover {
   background-color: darkblue;
 }
+.next.disabled {
+  background-color: #ccc;
+  color: #666;
+  pointer-events: none;
+  cursor: not-allowed;
+}
 /* === Chips Input Container === */
 .main-container {
   display: flex;

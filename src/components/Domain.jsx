@@ -32,7 +32,7 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
     setSelectedItems({ ...selectedItems, domain: updatedSelections });
   };
 
-  // ✅ Handle multiple input fields (stored in parent state)
+  // ✅ Handle input fields for domain details
   const handleInputChange = (index, value) => {
     const updatedInputs = [...(selectedItems.domainInputs || [])];
     updatedInputs[index] = value;
@@ -44,6 +44,9 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
     "space",
     "official email-id",
   ];
+
+  // ✅ Enable next only if a website type is selected
+  const isTypeSelected = !!selectedItems.type;
 
   return (
     <div style={{ marginTop: "30px" }}>
@@ -82,14 +85,13 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
               )}
               <div>
                 <p className="type-name">{item.name}</p>
-              
               </div>
             </li>
           );
         })}
       </ul>
 
-      {/* Input fields (side-by-side) */}
+      {/* Input fields */}
       <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
         {placeholders.map((placeholder, index) => (
           <input
@@ -109,15 +111,18 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         ))}
       </div>
 
-      {/* Next Button */}
-      <NavLink
-        to="/pages"
-        className="next"
-        
-        
-      >
-        Next
-      </NavLink>
+      {/* ✅ Next Button — enabled only when Type is selected */}
+      <div className="btn" style={{ marginTop: "30px" }}>
+        <NavLink
+          to={isTypeSelected ? "/pages" : "#"}
+          className={`next ${!isTypeSelected ? "disabled" : ""}`}
+          onClick={(e) => {
+            if (!isTypeSelected) e.preventDefault();
+          }}
+        >
+          Next
+        </NavLink>
+      </div>
     </div>
   );
 };

@@ -14,6 +14,9 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
     setSelectedItems({ ...selectedItems, pages: item });
   };
 
+  // ✅ Enable Next button only if a page is selected
+  const isPageSelected = !!selectedItems.pages;
+
   return (
     <>
       <h3 className="head">How much to make website</h3>
@@ -54,11 +57,20 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
       <Chips selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
 
       {/* Navigation Buttons */}
-      <div className="btn">
+      <div className="btn" style={{ marginTop: "30px" }}>
+        {/* ✅ Previous always enabled */}
         <NavLink className="next" to="/">
           Previous
         </NavLink>
-        <NavLink className="next" to="/nextPages">
+
+        {/* ✅ Next disabled until page is selected */}
+        <NavLink
+          to={isPageSelected ? "/nextPages" : "#"}
+          className={`next ${!isPageSelected ? "disabled" : ""}`}
+          onClick={(e) => {
+            if (!isPageSelected) e.preventDefault();
+          }}
+        >
           Next
         </NavLink>
       </div>

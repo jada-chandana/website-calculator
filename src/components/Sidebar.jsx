@@ -1,21 +1,24 @@
 import React from "react";
 import "./Sidebar.css";
-import SpecialRequirements from "./SpecialRequirements";
 
-const Sidebar = ({ selectedItems }) => {
-  // ✅ Calculate total for domains (array)
-  const domainTotal = Array.isArray(selectedItems.domain)
-    ? selectedItems.domain.reduce(
-        (sum, item) => sum + (item.price ? Number(item.price) : 0),
-        0
-      )
-    : 0;
+const Sidebar = ({ selectedItems = {} }) => {
+  // ✅ Safely calculate totals for arrays (domain, requirements, integrations)
+  const getTotal = (arr) =>
+    Array.isArray(arr)
+      ? arr.reduce((sum, item) => sum + (Number(item.price) || 0), 0)
+      : 0;
 
-  // ✅ Final total price
+  const domainTotal = getTotal(selectedItems.domain);
+  const requirementsTotal = getTotal(selectedItems.requirements);
+  const integrationsTotal = getTotal(selectedItems.integrations);
+
+  // ✅ Calculate grand total
   const totalPrice =
-    (selectedItems.type?.price ? Number(selectedItems.type.price) : 0) +
+    (Number(selectedItems.type?.price) || 0) +
     domainTotal +
-    (selectedItems.pages?.price ? Number(selectedItems.pages.price) : 0);
+    (Number(selectedItems.pages?.price) || 0) +
+    requirementsTotal +
+    integrationsTotal;
 
   return (
     <div className="sidebar">
@@ -23,7 +26,7 @@ const Sidebar = ({ selectedItems }) => {
 
       {/* Website Type */}
       {selectedItems.type && (
-        <div>
+        <div className="sidebar-section">
           <p>
             <strong>Website Type:</strong> {selectedItems.type.name}
           </p>
@@ -31,12 +34,10 @@ const Sidebar = ({ selectedItems }) => {
         </div>
       )}
 
-      {/* Domain */}
-      {selectedItems.domain && selectedItems.domain.length > 0 && (
-        <div>
-          <p>
-            <strong>Selected Domains:</strong>
-          </p>
+      {/* Domain Selections */}
+      {Array.isArray(selectedItems.domain) && selectedItems.domain.length > 0 && (
+        <div className="sidebar-section">
+          <p><strong>Selected Domains:</strong></p>
           <ul>
             {selectedItems.domain.map((d, i) => (
               <li key={i}>
@@ -44,13 +45,12 @@ const Sidebar = ({ selectedItems }) => {
               </li>
             ))}
           </ul>
-          {SpecialRequirements.requirement && selectedRequirements.requirements.length}
         </div>
       )}
 
       {/* Pages */}
       {selectedItems.pages && (
-        <div>
+        <div className="sidebar-section">
           <p>
             <strong>Pages:</strong> {selectedItems.pages.name}
           </p>
@@ -58,12 +58,25 @@ const Sidebar = ({ selectedItems }) => {
         </div>
       )}
 
-      {/* Chips / Menu Items */}
-      {selectedItems.chips && selectedItems.chips.length > 0 && (
+      {/* Special Requirements */}
+      {Array.isArray(selectedItems.requirements) &&
+        selectedItems.requirements.length > 0 && (
+          <div className="sidebar-section">
+            <p><strong>Special Requirements:</strong></p>
+            <ul>
+              {selectedItems.requirements.map((req, i) => (
+                <li key={i}>
+                  {req.name} — ₹{req.price}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+      {/* Chips (menu items) */}
+      {Array.isArray(selectedItems.chips) && selectedItems.chips.length > 0 && (
         <div className="sidebar-section">
-          <p>
-            <strong>Selected Menu Items:</strong>
-          </p>
+          <p><strong>Selected Menu Items:</strong></p>
           <ul className="chip-list">
             {selectedItems.chips.map((chip, index) => (
               <li key={index} className="chip-item-sidebar">
@@ -74,7 +87,22 @@ const Sidebar = ({ selectedItems }) => {
         </div>
       )}
 
-      {/* ✅ Total Price Section */}
+      {/* Integrations */}
+      {Array.isArray(selectedItems.integrations) &&
+        selectedItems.integrations.length > 0 && (
+          <div className="sidebar-section">
+            <p><strong>Selected Integrations:</strong></p>
+            <ul>
+              {selectedItems.integrations.map((integration, index) => (
+                <li key={index}>
+                  {integration.name} — ₹{integration.price}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+      {/* Total */}
       <div className="total-section">
         <h4>Total Price: ₹{totalPrice}</h4>
       </div>

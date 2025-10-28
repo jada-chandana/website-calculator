@@ -5,18 +5,21 @@ import Type from "./components/Type";
 import Domain from "./components/Domain";
 import Sidebar from "./components/Sidebar";
 import Pages from "./components/NumberOfPages";
-import Special from "./components/SpecialRequirements";
-
+import SpecialRequirements from "./components/SpecialRequirements";
+import Integration from "./components/integrations";
 function App() {
   const [selectedItems, setSelectedItems] = useState({
     type: null,
-    domain: null,
+    domain: [],         // ✅ supports multiple domain selections
+    pages: null,
+    requirements: [],   // ✅ for special requirements
+    chips: [],          // optional: if you’re using ChipsInput
   });
 
   return (
     <Router>
       <div style={{ display: "flex", alignItems: "flex-start" }}>
-        {/* Routes section */}
+        {/* Main content area */}
         <div style={{ flex: 1, padding: "20px" }}>
           <Routes>
             {/* Home Page — shows Type + Domain */}
@@ -46,16 +49,30 @@ function App() {
                 />
               }
             />
-         <Route
-  path="/nextPages"
-  element={<Special />}
-/>
-  
-          </Routes>
+           
 
+            {/* Special Requirements Route */}
+            <Route
+              path="/nextPages"
+              element={
+                <>
+                  <SpecialRequirements
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                  />
+                  <Integration
+                    selectedItems={selectedItems}
+                    setSelectedItems={setSelectedItems}
+                  />
+                </>
+              }
+            />
+             
+          </Routes>
+          
         </div>
 
-        {/* Sidebar visible on all pages */}
+        {/* Sidebar — visible on all pages */}
         <Sidebar selectedItems={selectedItems} />
       </div>
     </Router>
