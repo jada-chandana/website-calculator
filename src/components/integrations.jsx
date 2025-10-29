@@ -1,16 +1,17 @@
 import React from "react";
-import chatbot from "../assets/chatbot.png"; 
+import chatbot from "../assets/chatbot.png";
 import Banner from "../assets/banner.png";
 import chat from "../assets/whatsapp.png";
 import payment from "../assets/payments.png";
-import sms from "../assets/smsApi.png"; 
-import { NavLink } from "react-router";
+import sms from "../assets/smsApi.png";
+import { NavLink } from "react-router-dom";
+
 const integrationsList = [
-  { name: "Live Chatbot", price: 1200,image:chatbot },
-  { name: "Google My Business Page", price: 1200,image:Banner },
-  { name: "WhatsApp Chat", price: 1200,image:chat},
-  { name: "Payment Gateway", price: 1200 ,image: payment},
-  { name: "SMS API", price: 1200 ,image: sms},
+  { name: "Live Chatbot", price: 1200, image: chatbot },
+  { name: "Google My Business Page", price: 1200, image: Banner },
+  { name: "WhatsApp Chat", price: 1200, image: chat },
+  { name: "Payment Gateway", price: 1200, image: payment },
+  { name: "SMS API", price: 1200, image: sms },
 ];
 
 const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
@@ -22,9 +23,10 @@ const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
       ? currentSelections.filter((int) => int.name !== item.name)
       : [...currentSelections, item];
 
-    // ✅ Correct way: merge into existing selectedItems object
     setSelectedItems({ ...selectedItems, integrations: updatedSelections });
   };
+
+  const isIntegrationSelected = (selectedItems.integrations || []).length > 0;
 
   return (
     <div>
@@ -34,24 +36,48 @@ const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
           const isSelected = (selectedItems.integrations || []).some(
             (i) => i.name === int.name
           );
+
           return (
             <li
               key={index}
-              className={`type-card ${isSelected ? "selected" : ""}`}
+              className="type-card"
               onClick={() => handleSelect(int)}
+              style={{
+                cursor: "pointer",
+                border: isSelected ? "2px solid blue" : "1px solid #ccc",
+                borderRadius: "8px",
+                padding: "10px",
+                marginBottom: "10px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                transition: "0.3s ease",
+              }}
             >
-              <img src={int.image} alt={int.name} className="type-image" />
-              <span>{int.name}</span>
+              <img
+                src={int.image}
+                alt={int.name}
+                style={{ width: "40px", height: "40px", objectFit: "contain" }}
+              />
+              <p style={{ margin: 0, fontWeight: "500" }}>{int.name}</p>
             </li>
           );
         })}
       </ul>
-     <div className="btn">
+
+      <div className="btn">
         <NavLink className="next" to="/pages">
           Previous
         </NavLink>
-        <NavLink className="next" to="/">
-          Home
+
+        <NavLink
+          to={isIntegrationSelected ? "/getQuote" : "#"}
+          className={`next ${!isIntegrationSelected ? "disabled" : ""}`}
+          onClick={(e) => {
+            if (!isIntegrationSelected) e.preventDefault();
+          }}
+        >
+          Next
         </NavLink>
       </div>
     </div>

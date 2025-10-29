@@ -2,7 +2,7 @@ import React from "react";
 import "./Sidebar.css";
 
 const Sidebar = ({ selectedItems = {} }) => {
-  // ✅ Safely calculate totals for arrays (domain, requirements, integrations)
+  // ✅ Helper to safely calculate total for arrays (domain, requirements, integrations)
   const getTotal = (arr) =>
     Array.isArray(arr)
       ? arr.reduce((sum, item) => sum + (Number(item.price) || 0), 0)
@@ -15,14 +15,30 @@ const Sidebar = ({ selectedItems = {} }) => {
   // ✅ Calculate grand total
   const totalPrice =
     (Number(selectedItems.type?.price) || 0) +
-    domainTotal +
     (Number(selectedItems.pages?.price) || 0) +
+    domainTotal +
     requirementsTotal +
     integrationsTotal;
 
+  // ✅ Common list renderer for multiple sections
+  const renderList = (title, items) => (
+    Array.isArray(items) && items.length > 0 && (
+      <div className="sidebar-section">
+        <p><strong>{title}</strong></p>
+        <ul>
+          {items.map((item, i) => (
+            <li key={i}>
+              {item.name} — ₹{item.price}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  );
+
   return (
     <div className="sidebar">
-      <h3 className="sidebar-title">Your Selection</h3>
+      <h3 className="sidebar-title">🧾 Your Selection Summary</h3>
 
       {/* Website Type */}
       {selectedItems.type && (
@@ -35,18 +51,7 @@ const Sidebar = ({ selectedItems = {} }) => {
       )}
 
       {/* Domain Selections */}
-      {Array.isArray(selectedItems.domain) && selectedItems.domain.length > 0 && (
-        <div className="sidebar-section">
-          <p><strong>Selected Domains:</strong></p>
-          <ul>
-            {selectedItems.domain.map((d, i) => (
-              <li key={i}>
-                {d.name} — ₹{d.price}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
+      {renderList("Selected Domains:", selectedItems.domain)}
 
       {/* Pages */}
       {selectedItems.pages && (
@@ -59,21 +64,9 @@ const Sidebar = ({ selectedItems = {} }) => {
       )}
 
       {/* Special Requirements */}
-      {Array.isArray(selectedItems.requirements) &&
-        selectedItems.requirements.length > 0 && (
-          <div className="sidebar-section">
-            <p><strong>Special Requirements:</strong></p>
-            <ul>
-              {selectedItems.requirements.map((req, i) => (
-                <li key={i}>
-                  {req.name} — ₹{req.price}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      {renderList("Special Requirements:", selectedItems.requirements)}
 
-      {/* Chips (menu items) */}
+      {/* Selected Menu Items */}
       {Array.isArray(selectedItems.chips) && selectedItems.chips.length > 0 && (
         <div className="sidebar-section">
           <p><strong>Selected Menu Items:</strong></p>
@@ -88,23 +81,11 @@ const Sidebar = ({ selectedItems = {} }) => {
       )}
 
       {/* Integrations */}
-      {Array.isArray(selectedItems.integrations) &&
-        selectedItems.integrations.length > 0 && (
-          <div className="sidebar-section">
-            <p><strong>Selected Integrations:</strong></p>
-            <ul>
-              {selectedItems.integrations.map((integration, index) => (
-                <li key={index}>
-                  {integration.name} — ₹{integration.price}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
+      {renderList("Selected Integrations:", selectedItems.integrations)}
 
       {/* Total */}
       <div className="total-section">
-        <h4>Total Price: ₹{totalPrice}</h4>
+        <h4>💰 Total Price: ₹{totalPrice}</h4>
       </div>
     </div>
   );

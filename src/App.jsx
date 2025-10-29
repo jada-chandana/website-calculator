@@ -7,6 +7,7 @@ import Sidebar from "./components/Sidebar";
 import Pages from "./components/NumberOfPages";
 import SpecialRequirements from "./components/SpecialRequirements";
 import Integration from "./components/integrations";
+import  ExtraRequirement from "./components/ExtraRequirements";
 function App() {
   const [selectedItems, setSelectedItems] = useState({
     type: null,
@@ -66,6 +67,12 @@ function App() {
                   />
                 </>
               }
+            />
+            <Route path="/getQuote"
+            element={
+              <>
+              <ExtraRequirement/></>
+            }
             />
              
           </Routes>

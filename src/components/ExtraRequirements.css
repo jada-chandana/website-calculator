@@ -1,0 +1,149 @@
+/* 🌐 HEADER */
+.head {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #0056d2;
+  color: white;
+  text-align: center;
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 15px 0;
+  margin: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 🧱 MAIN CONTAINER */
+.extra-container {
+  margin-top: 130px; /* Creates space below fixed header */
+  background: #fff;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: "Poppins", sans-serif;
+  transition: all 0.3s ease;
+}
+
+/* 🏷️ SECTION HEADING */
+.extra-heading {
+  font-size: 22px;
+  font-weight: 600;
+  color: #444;
+  margin: 20px 0 15px;
+  text-align: center;
+}
+
+/* 🧾 FORM STYLING */
+.extra-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 🏷️ LABELS */
+label {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+/* ✍️ TEXTAREA */
+textarea {
+  height: 100px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  resize: none;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+textarea:focus {
+  border-color: #a855f7;
+}
+
+/* 📎 FILE INPUT */
+input[type="file"] {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.file-name {
+  color: #4caf50;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+.file-placeholder {
+  color: red;
+  font-size: 13px;
+  margin-top: 5px;
+}
+
+/* 🔘 BUTTONS */
+/* .btn-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+}
+
+.prev-btn,
+.quote-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 10px 25px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+} */
+
+
+
+/* 📱 RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+  .head {
+    font-size: 32px;
+    padding: 12px 0;
+  }
+
+  .extra-container {
+    margin-top: 100px;
+    padding: 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .btn-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

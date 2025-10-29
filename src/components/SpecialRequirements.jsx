@@ -12,7 +12,7 @@ import Content from "../assets/content.png";
 const requirements = [
   { name: "SEO Friendly", price: 1200, image: seo },
   { name: "On Page SEO", price: 1200, image: OnPage },
-  { name: "Social Media Linking?", price: 1200, image: Social },
+  { name: "Social Media Linking", price: 1200, image: Social },
   { name: "Popup Enquiry", price: 1200, image: popup },
   { name: "Banner Dynamic", price: 1200, image: Banner },
   { name: "Admin Panel", price: 1200, image: Admin },
@@ -27,15 +27,14 @@ const SpecialRequirements = ({ selectedItems = {}, setSelectedItems = () => {} }
 
     const updatedSelections = alreadySelected
       ? currentSelections.filter((req) => req.name !== item.name)
-      : [...currentSelections, item];
+      : [...currentSelections, item]; // ✅ add full object (name + price)
 
     setSelectedItems({ ...selectedItems, requirements: updatedSelections });
   };
 
   return (
     <div>
-      <h3 className="head">How much to mak
-        e website</h3>
+      <h3 className="head">How much to make website</h3>
       <h3 className="sub">Special Requirements</h3>
 
       <ul className="item">
@@ -43,20 +42,43 @@ const SpecialRequirements = ({ selectedItems = {}, setSelectedItems = () => {} }
           const isSelected = (selectedItems.requirements || []).some(
             (r) => r.name === req.name
           );
+
           return (
-            <li
-              key={index}
-              className={"type-card"}
-              onClick={() => handleSelect(req)}
-            >
+                 <li
+        key={index}
+        className="type-card"
+        onClick={() => handleSelect(req)}
+        // style={{
+        //   cursor: "pointer",
+        //   border: isSelected ? "2px solid blue" : "1px solid #ccc",
+        //   borderRadius: "10px",
+        //   padding: "16px",
+        //   marginBottom: "12px",
+        //   display: "flex",
+        //   flexDirection: "column",
+        //   alignItems: "center",
+        //   justifyContent: "center",
+        //   textAlign: "center",
+        //   gap: "8px",
+        //   backgroundColor: isSelected ? "#e8f2ff" : "#fff",
+        //   transition: "all 0.3s ease",
+        //   boxShadow: isSelected
+        //     ? "0 0 10px rgba(0, 123, 255, 0.3)"
+        //     : "0 2px 5px rgba(0, 0, 0, 0.1)",
+        // }}
+      >
               <img src={req.image} alt={req.name} className="type-image" />
-              <span>{req.name}</span>
+              <div className="card-content">
+                <span>{req.name}</span>
+               
+              </div>
             </li>
           );
         })}
       </ul>
 
-      
+      {/* Optional navigation */}
+     
     </div>
   );
 };
