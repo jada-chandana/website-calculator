@@ -7,15 +7,17 @@ import Sidebar from "./components/Sidebar";
 import Pages from "./components/NumberOfPages";
 import SpecialRequirements from "./components/SpecialRequirements";
 import Integration from "./components/integrations";
-// import  ExtraRequirement from "./components/ExtraRequirements";
+import RequirementsTable from "./components/Requirement";
 import Contact from "./components/contact";
+
 function App() {
   const [selectedItems, setSelectedItems] = useState({
     type: null,
-    domain: [],         // ✅ supports multiple domain selections
+    domain: [],         // multiple selections supported
     pages: null,
-    requirements: [],   // ✅ for special requirements
-    chips: [],          // optional: if you’re using ChipsInput
+    requirements: [],
+    integrations: [],
+    chips: [],
   });
 
   return (
@@ -24,7 +26,7 @@ function App() {
         {/* Main content area */}
         <div style={{ flex: 1, padding: "20px" }}>
           <Routes>
-            {/* Home Page — shows Type + Domain */}
+            {/* Home Page — Type + Domain */}
             <Route
               path="/"
               element={
@@ -41,7 +43,7 @@ function App() {
               }
             />
 
-            {/* Pages Route */}
+            {/* Number of Pages */}
             <Route
               path="/pages"
               element={
@@ -51,9 +53,8 @@ function App() {
                 />
               }
             />
-           
 
-            {/* Special Requirements Route */}
+            {/* Special Requirements + Integrations */}
             <Route
               path="/nextPages"
               element={
@@ -69,15 +70,21 @@ function App() {
                 </>
               }
             />
-            <Route path="/contact"
-            element={
-              <>
-              <Contact/></>
-            }
+
+            {/* Contact Page */}
+            <Route path="/contact" element={<Contact />} />
+
+            {/* ✅ Requirements Summary Page */}
+            <Route
+              path="/summary"
+              element={
+                <RequirementsTable
+                  selectedItems={selectedItems}
+                  setSelectedItems={setSelectedItems}
+                />
+              }
             />
-             
           </Routes>
-          
         </div>
 
         {/* Sidebar — visible on all pages */}
