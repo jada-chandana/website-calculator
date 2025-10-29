@@ -276,6 +276,83 @@ html, body {
   color: white;
   
 }
+/* Card container */
+.contact-card {
+  width: 100%;
+  max-width: 400px;
+  margin: 60px auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px 25px;
+  font-family: "Poppins", sans-serif;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Title */
+.contact-title {
+  text-align: center;
+  color: #0056d2;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+/* Input fields */
+.contact-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+label {
+  font-weight: 500;
+  color: #444;
+}
+
+input {
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
+  font-size: 14px;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border-color: #0056d2;
+  box-shadow: 0 0 4px rgba(0, 86, 210, 0.3);
+}
+
+/* Submit button */
+.contact-btn {
+  margin-top: 20px;
+  width: 100%;
+  background-color: #0056d2;
+  color: white;
+  border: none;
+  padding: 12px 0;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-btn:hover {
+  background-color: #003d99;
+}
+.contact-input
+{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
+}
 
 /* === Responsive Design === */
 @media (max-width: 900px) {
@@ -294,3 +371,4 @@ html, body {
     margin-top: 80px; /* smaller gap for mobile */
   }
 }
+

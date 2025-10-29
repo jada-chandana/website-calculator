@@ -71,7 +71,7 @@ const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         </NavLink>
 
         <NavLink
-          to={isIntegrationSelected ? "/getQuote" : "#"}
+          to={isIntegrationSelected ? "/contact" : "#"}
           className={`next ${!isIntegrationSelected ? "disabled" : ""}`}
           onClick={(e) => {
             if (!isIntegrationSelected) e.preventDefault();

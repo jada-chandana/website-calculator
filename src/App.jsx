@@ -7,7 +7,8 @@ import Sidebar from "./components/Sidebar";
 import Pages from "./components/NumberOfPages";
 import SpecialRequirements from "./components/SpecialRequirements";
 import Integration from "./components/integrations";
-import  ExtraRequirement from "./components/ExtraRequirements";
+// import  ExtraRequirement from "./components/ExtraRequirements";
+import Contact from "./components/contact";
 function App() {
   const [selectedItems, setSelectedItems] = useState({
     type: null,
@@ -68,10 +69,10 @@ function App() {
                 </>
               }
             />
-            <Route path="/getQuote"
+            <Route path="/contact"
             element={
               <>
-              <ExtraRequirement/></>
+              <Contact/></>
             }
             />
              
