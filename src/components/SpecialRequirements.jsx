@@ -48,24 +48,17 @@ const SpecialRequirements = ({ selectedItems = {}, setSelectedItems = () => {} }
         key={index}
         className="type-card"
         onClick={() => handleSelect(req)}
-        // style={{
-        //   cursor: "pointer",
-        //   border: isSelected ? "2px solid blue" : "1px solid #ccc",
-        //   borderRadius: "10px",
-        //   padding: "16px",
-        //   marginBottom: "12px",
-        //   display: "flex",
-        //   flexDirection: "column",
-        //   alignItems: "center",
-        //   justifyContent: "center",
-        //   textAlign: "center",
-        //   gap: "8px",
-        //   backgroundColor: isSelected ? "#e8f2ff" : "#fff",
-        //   transition: "all 0.3s ease",
-        //   boxShadow: isSelected
-        //     ? "0 0 10px rgba(0, 123, 255, 0.3)"
-        //     : "0 2px 5px rgba(0, 0, 0, 0.1)",
-        // }}
+    style={{
+                cursor: "pointer",
+                border: isSelected ? "2px solid blue" : "1px solid #ccc",
+                borderRadius: "8px",
+                padding: "10px",
+                marginBottom: "10px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                transition: "0.3s ease",
+              }}
       >
               <img src={req.image} alt={req.name} className="type-image" />
               <div className="card-content">

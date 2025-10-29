@@ -63,19 +63,17 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
               key={index}
               className="type-card"
               onClick={() => handleSelect(item)}
-             style={{
-              cursor: "pointer",
-              border:
-                selectedItems.type?.name === item.name
-                  ? "2px solid blue"
-                  : "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "10px",
-              marginBottom: "10px",
-              display: "flex",
-              alignItems: "center",
-              gap: "10px",
-            }}
+           style={{
+                cursor: "pointer",
+                border: isSelected ? "2px solid blue" : "1px solid #ccc",
+                borderRadius: "8px",
+                padding: "10px",
+                marginBottom: "10px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                transition: "0.3s ease",
+              }}
             >
               {item.image && (
                 <img
