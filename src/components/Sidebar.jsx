@@ -12,19 +12,38 @@ const Sidebar = ({ selectedItems = {} }) => {
   const requirementsTotal = getTotal(selectedItems.requirements);
   const integrationsTotal = getTotal(selectedItems.integrations);
 
-  // ✅ Calculate grand total
+  // ✅ Extra charge calculation based on pages + chips
+  let extraCharge = 0;
+  if (
+    selectedItems.pages &&
+    Array.isArray(selectedItems.chips) &&
+    selectedItems.pages.limit !== Infinity
+  ) {
+    const chipsCount = selectedItems.chips.length;
+    const limit = selectedItems.pages.limit;
+    if (chipsCount > limit) {
+      const extraItems = chipsCount - limit;
+      extraCharge = extraItems * 200;
+    }
+  }
+
+  // ✅ Calculate grand total (including extra charge)
   const totalPrice =
     (Number(selectedItems.type?.price) || 0) +
     (Number(selectedItems.pages?.price) || 0) +
     domainTotal +
     requirementsTotal +
-    integrationsTotal;
+    integrationsTotal +
+    extraCharge;
 
   // ✅ Common list renderer for multiple sections
-  const renderList = (title, items) => (
-    Array.isArray(items) && items.length > 0 && (
+  const renderList = (title, items) =>
+    Array.isArray(items) &&
+    items.length > 0 && (
       <div className="sidebar-section">
-        <p><strong>{title}</strong></p>
+        <p>
+          <strong>{title}</strong>
+        </p>
         <ul>
           {items.map((item, i) => (
             <li key={i}>
@@ -33,8 +52,7 @@ const Sidebar = ({ selectedItems = {} }) => {
           ))}
         </ul>
       </div>
-    )
-  );
+    );
 
   return (
     <div className="sidebar">
@@ -59,7 +77,12 @@ const Sidebar = ({ selectedItems = {} }) => {
           <p>
             <strong>Pages:</strong> {selectedItems.pages.name}
           </p>
-          <p>₹{selectedItems.pages.price}</p>
+          {/* <p>₹{selectedItems.pages.price}</p> */}
+          {extraCharge > 0 && (
+            <p> ₹
+              {extraCharge}
+            </p>
+          )}
         </div>
       )}
 
@@ -69,7 +92,9 @@ const Sidebar = ({ selectedItems = {} }) => {
       {/* Selected Menu Items */}
       {Array.isArray(selectedItems.chips) && selectedItems.chips.length > 0 && (
         <div className="sidebar-section">
-          <p><strong>Selected Menu Items:</strong></p>
+          <p>
+            <strong>Selected Menu Items:</strong>
+          </p>
           <ul className="chip-list">
             {selectedItems.chips.map((chip, index) => (
               <li key={index} className="chip-item-sidebar">

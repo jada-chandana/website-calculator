@@ -1,15 +1,17 @@
 import React from "react";
+import { useState,useEffect } from "react";
 import Chips from "./ChipsInput";
 import { NavLink } from "react-router-dom";
 
 const type = [
-  { name: "1-4", price: 500 },
-  { name: "5-9", price: 1000 },
-  { name: "10-14", price: 1500 },
-  { name: "Unlimited", price: 2000 },
+  { name: "1-4", price: 0 ,limit:4},
+  { name: "5-9", price: 0 ,limit:9},
+  { name: "10-14", price: 0 ,limit:14},
+  { name: "Unlimited", price: 0,limit:Infinity },
 ];
 
 const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
+  
   const handleSelect = (item) => {
     setSelectedItems({ ...selectedItems, pages: item });
   };

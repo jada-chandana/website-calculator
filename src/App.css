@@ -413,6 +413,10 @@ input:focus {
   flex-direction: column;
   gap:10px;
 }
+.error
+{
+  color:red;
+}
 
 /* === Responsive Design === */
 @media (max-width: 900px) {

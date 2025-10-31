@@ -138,6 +138,7 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
             >
               &times;
             </button>
+            
           </div>
         ))}
       </div>
