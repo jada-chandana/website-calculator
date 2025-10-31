@@ -77,8 +77,8 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
       {/* Input for adding custom chips */}
       <input
         type="text"
-        placeholder="Type page name and press Enter..."
-        className="input"
+        placeholder="Type page name"
+        className="search-input"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -86,27 +86,17 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
 
       {/* ✅ Predefined Menu */}
       <div className="menu">
-        {menuItems.map((item, index) => (
-          <button
-            key={index}
-            onClick={() => handleButtonClick(item)}
-            style={{
-              cursor: "pointer",
-              border: chips.includes(item)
-                ? "2px solid blue"
-                : "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "10px 15px",
-              margin: "5px",
-              backgroundColor: chips.includes(item) ? "#eaf0ff" : "white",
-              color: chips.includes(item) ? "#0056d2" : "#333",
-              transition: "all 0.3s ease",
-            }}
-          >
-            {item}
-          </button>
-        ))}
-      </div>
+  {menuItems.map((item, index) => (
+    <button
+      key={index}
+      onClick={() => handleButtonClick(item)}
+      className={`menu-button ${chips.includes(item) ? "active" : ""}`}
+    >
+      {item}
+    </button>
+  ))}
+</div>
+
 
       {/* ✅ Chips added by typing (and selected items) */}
       <div className="selected-chips">

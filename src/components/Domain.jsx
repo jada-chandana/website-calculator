@@ -4,6 +4,7 @@ import DomainImg from "../assets/domain.png";
 import Hostinger from "../assets/hostinger.png";
 import Email from "../assets/official_email.png";
 
+
 const domainOptions = [
   { name: "Domain", price: "1200", image: DomainImg },
   { name: "Hostinger", price: "1500", image: Hostinger },
@@ -41,8 +42,8 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
 
   const placeholders = [
     "Enter main domain name",
-    "space",
-    "official email-id",
+    "Space",
+    "Official email ID",
   ];
 
   // ✅ Enable next only if a website type is selected
@@ -63,7 +64,7 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
               key={index}
               className="type-card"
               onClick={() => handleSelect(item)}
-           style={{
+              style={{
                 cursor: "pointer",
                 border: isSelected ? "2px solid blue" : "1px solid #ccc",
                 borderRadius: "8px",
@@ -90,8 +91,8 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         })}
       </ul>
 
-      {/* Input fields */}
-      <div style={{ display: "flex", gap: "15px", marginTop: "20px" }}>
+      {/* ✅ Responsive Input Fields */}
+      <div className="input-container">
         {placeholders.map((placeholder, index) => (
           <input
             key={index}
@@ -100,12 +101,6 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
             placeholder={placeholder}
             value={selectedItems.domainInputs?.[index] || ""}
             onChange={(e) => handleInputChange(index, e.target.value)}
-            style={{
-              flex: 1,
-              padding: "10px",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
-            }}
           />
         ))}
       </div>

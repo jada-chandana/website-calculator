@@ -246,6 +246,29 @@ html, body {
   color: red;
 }
 
+@media (min-width: 1024px) {
+  .head {
+    font-size: 3rem; /* ~48px */
+    padding: 15px 0;
+  }
+}
+
+/* ✅ Medium screens (tablet) */
+@media (max-width: 768px) {
+  .head {
+    font-size: 2rem; /* ~32px */
+    padding: 10px 0;
+  }
+}
+
+/* ✅ Small screens (mobile) */
+@media (max-width: 480px) {
+  .head {
+    font-size: 1.5rem; /* ~24px */
+    padding: 8px 0;
+    letter-spacing: 0.3px;
+  }
+}
 /* === Responsive Design === */
 @media (max-width: 600px) {
   .sub
@@ -437,6 +460,98 @@ input:focus {
 
   .sub {
     margin-top: 150px; /* smaller gap for mobile */
+  }
+}
+.input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Container for the inputs */
+.input-container {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* allows wrapping on smaller screens */
+}
+
+/* ✅ Responsive: stack inputs on small screens */
+@media (max-width: 768px) {
+  .input-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input {
+    width: 60%;
+    
+    margin-left: 50px;
+  }
+}
+.search-input
+{
+  width:50%;
+  align-items: center;
+}
+.menu {
+  display: flex;
+  flex-wrap: wrap; /* allows buttons to move to new lines */
+  gap: 10px;
+  justify-content: center; /* center align on all screens */
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Common button styles */
+.menu-button {
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 15px;
+  background-color: white;
+  color: #333;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+/* Active (selected) state */
+.menu-button.active {
+  border: 2px solid blue;
+  background-color: #eaf0ff;
+  color: #0056d2;
+}
+
+/* Hover effect */
+.menu-button:hover {
+  background-color: #f2f6ff;
+}
+
+/* ✅ Responsive tweaks */
+@media (max-width: 768px) {
+  .menu {
+    justify-content: flex-start;
+    gap: 8px;
+     width:50%;
+   
+  }
+
+  .menu-button {
+    flex: 1 1 45%; /* take roughly half width on smaller screens */
+    font-size: 14px;
+    padding: 8px 10px;
+     width:50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-button {
+    flex: 1 1 50%; /* stack buttons vertically */
+    font-size: 14px;
   }
 }
 

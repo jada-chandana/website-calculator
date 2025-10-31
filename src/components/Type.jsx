@@ -22,7 +22,7 @@ const Type = ({ selectedItems, setSelectedItems }) => {
 
   return (
    <>
-   <h3 className="head">How much to make website</h3>
+   <h3 className="head">How Much  Cost to Make website</h3>
     <div className="section">
        
       <h3 className="sub">Website Type</h3>
