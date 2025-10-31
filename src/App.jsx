@@ -84,12 +84,11 @@ function App() {
                 />
               }
             />
-            <Sidebar selectedItems={selectedItems} />
           </Routes>
         </div>
 
         {/* Sidebar — visible on all pages */}
-        
+        <Sidebar selectedItems={selectedItems} />
       </div>
     </Router>
   );
