@@ -248,6 +248,10 @@ html, body {
 
 /* === Responsive Design === */
 @media (max-width: 600px) {
+  .sub
+  {
+    margin-top: 150px;
+  }
   .input {
     width: 90%;
   }
@@ -432,7 +436,7 @@ input:focus {
   }
 
   .sub {
-    margin-top: 80px; /* smaller gap for mobile */
+    margin-top: 150px; /* smaller gap for mobile */
   }
 }
 
