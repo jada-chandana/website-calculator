@@ -1,29 +1,32 @@
 import React from "react";
-import { useState,useEffect } from "react";
-import Chips from "./ChipsInput";
 import { NavLink } from "react-router-dom";
+import Chips from "./ChipsInput";
 
 const type = [
-  { name: "1-4", price: 0 ,limit:4},
-  { name: "5-9", price: 0 ,limit:9},
-  { name: "10-14", price: 0 ,limit:14},
-  { name: "Unlimited", price: 0,limit:Infinity },
+  { name: "1-4", price: 0, limit: 4 },
+  { name: "5-9", price: 0, limit: 9 },
+  { name: "10-14", price: 0, limit: 14 },
+  { name: "Unlimited", price: 0, limit: Infinity },
 ];
 
 const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
-  
+  // Handle selection of page type
   const handleSelect = (item) => {
     setSelectedItems({ ...selectedItems, pages: item });
   };
 
-  // ✅ Enable Next button only if a page is selected
-  const isPageSelected = !!selectedItems.pages;
+  // ✅ Get chips safely (empty array if not present)
+  const selectedChips = selectedItems.chips || [];
+
+  // ✅ Enable "Next" only if either pages or chips are selected
+  const isNextEnabled = !!selectedItems.pages && selectedChips.length >0;
 
   return (
     <>
       <h3 className="head">How much to make website</h3>
       <h3 className="sub">Number of Pages</h3>
 
+      {/* ✅ Page Options */}
       <ul className="item-grid">
         {type.map((item, index) => (
           <li
@@ -33,7 +36,7 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
               cursor: "pointer",
               border:
                 selectedItems?.pages?.name === item.name
-                  ? "2px solid blue"
+                  ? "2px solid #0056d2"
                   : "1px solid #ccc",
               borderRadius: "8px",
               padding: "15px",
@@ -55,22 +58,20 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         ))}
       </ul>
 
-      {/* Chips Input */}
+      {/* ✅ Chips Input Section */}
       <Chips selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
 
-      {/* Navigation Buttons */}
+      {/* ✅ Navigation Buttons */}
       <div className="btn" style={{ marginTop: "30px" }}>
-        {/* ✅ Previous always enabled */}
         <NavLink className="next" to="/">
           Previous
         </NavLink>
 
-        {/* ✅ Next disabled until page is selected */}
         <NavLink
-          to={isPageSelected ? "/nextPages" : "#"}
-          className={`next ${!isPageSelected ? "disabled" : ""}`}
+          to={isNextEnabled ? "/nextPages" : "#"}
+          className={`next ${!isNextEnabled ? "disabled" : ""}`}
           onClick={(e) => {
-            if (!isPageSelected) e.preventDefault();
+            if (!isNextEnabled) e.preventDefault();
           }}
         >
           Next

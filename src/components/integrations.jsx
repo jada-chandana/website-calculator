@@ -33,7 +33,7 @@ const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
       <h3 className="sub">Integrations</h3>
       <ul className="item">
         {integrationsList.map((int, index) => {
-          const isSelected = (selectedItems.integrations || []).some(
+          const isSelected = (selectedItems.integrations && []).some(
             (i) => i.name === int.name
           );
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -6,6 +6,7 @@ const Contact = () => {
     phone: "",
     email: "",
   });
+ 
 
   const [errors, setErrors] = useState({});
 
@@ -84,7 +85,9 @@ const Contact = () => {
           Submit
         </button>
       </form>
+      
     </div>
+   
   );
 };
 

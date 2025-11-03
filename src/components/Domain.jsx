@@ -40,11 +40,7 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
     setSelectedItems({ ...selectedItems, domainInputs: updatedInputs });
   };
 
-  const placeholders = [
-    "Enter main domain name",
-    "Space",
-    "Official email ID",
-  ];
+
 
   // ✅ Enable next only if a website type is selected
   const isTypeSelected = !!selectedItems.type;
@@ -91,19 +87,7 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         })}
       </ul>
 
-      {/* ✅ Responsive Input Fields */}
-      <div className="input-container">
-        {placeholders.map((placeholder, index) => (
-          <input
-            key={index}
-            className="input"
-            type="text"
-            placeholder={placeholder}
-            value={selectedItems.domainInputs?.[index] || ""}
-            onChange={(e) => handleInputChange(index, e.target.value)}
-          />
-        ))}
-      </div>
+      
 
       {/* ✅ Next Button — enabled only when Type is selected */}
       <div className="btn" style={{ marginTop: "30px" }}>
