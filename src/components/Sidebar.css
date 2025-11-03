@@ -3,14 +3,14 @@
   top: 100px; /* keep below header if any */
   left: 20px;
   width: 320px;
-  height: 30vh; /* ✅ reduced height */
+  height: 60vh; /* 🔹 increased height */
   background-color: #0056d2;
   color: white;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
   transition: transform 0.3s ease;
-  z-index: 1001;
+  z-index: 100;
 
   /* ✅ scrolling enabled */
   overflow-y: auto;
@@ -93,7 +93,7 @@
     top: 0;
     left: 0;
     width: 280px;
-    height: 50vh; /* a bit taller on mobile */
+    height: 60vh; /* 🔹 increased height for mobile too */
     transform: translateX(-100%);
   }
 
@@ -108,7 +108,7 @@
     position: relative;
     margin-top: 100px;
     margin-left: 20px;
-    height: 30vh; /* ✅ reduced height applied */
+    height: 60vh; /* 🔹 updated from 30vh to 50vh */
     transform: none;
   }
 

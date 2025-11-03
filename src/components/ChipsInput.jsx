@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion"; // 🧩 Import animation tools
 
 function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
   const [chips, setChips] = useState([]);
@@ -44,7 +45,7 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
     setSelectedItems({ ...selectedItems, chips });
   }, [chips]);
 
-  // ✅ Press Enter → add chip only (don’t add to menu)
+  // ✅ Press Enter → add chip
   const handleKeyDown = (e) => {
     if (e.key === "Enter" && inputValue.trim() !== "") {
       e.preventDefault();
@@ -71,68 +72,97 @@ function ChipsInput({ selectedItems = {}, setSelectedItems = () => {} }) {
   };
 
   return (
-    <div className="main-container">
-      <h3 className="su">Pages</h3>
+    <motion.div
+      className="main-container"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+    >
+      {/* Animated heading */}
+      <motion.h3
+        className="su"
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        Pages
+      </motion.h3>
 
       {/* Input for adding custom chips */}
-      <input
+      <motion.input
         type="text"
         placeholder="Type page name"
         className="search-input"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
         onKeyDown={handleKeyDown}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 0.3 }}
+        whileFocus={{ scale: 1.02, borderColor: "#0056d2" }}
       />
 
-      {/* ✅ Predefined Menu */}
+      {/* Animated Predefined Menu */}
       <div className="menu">
-  {menuItems.map((item, index) => (
-    <button
-      key={index}
-      onClick={() => handleButtonClick(item)}
-      className={`menu-button ${chips.includes(item) ? "active" : ""}`}
-    >
-      {item}
-    </button>
-  ))}
-</div>
-
-
-      {/* ✅ Chips added by typing (and selected items) */}
-      <div className="selected-chips">
-        {chips.map((chip, index) => (
-          <div
-            className="chip-item"
+        {menuItems.map((item, index) => (
+          <motion.button
             key={index}
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              border: "1px solid #ccc",
-              borderRadius: "20px",
-              padding: "5px 10px",
-              margin: "5px",
-              backgroundColor: "#f5f5f5",
-            }}
+            onClick={() => handleButtonClick(item)}
+            className={`menu-button ${chips.includes(item) ? "active" : ""}`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: index * 0.02 }}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
           >
-            <span>{chip}</span>
-            <button
-              className="close-btn"
-              onClick={() => removeChip(chip)}
-              style={{
-                border: "none",
-                background: "none",
-                cursor: "pointer",
-                marginLeft: "5px",
-                color: "red",
-              }}
-            >
-              &times;
-            </button>
-            
-          </div>
+            {item}
+          </motion.button>
         ))}
       </div>
-    </div>
+
+      {/* ✅ Animated Chips Section */}
+      <div className="selected-chips">
+        <AnimatePresence>
+          {chips.map((chip, index) => (
+            <motion.div
+              key={chip}
+              className="chip-item"
+              initial={{ opacity: 0, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                border: "1px solid #ccc",
+                borderRadius: "20px",
+                padding: "5px 10px",
+                margin: "5px",
+                backgroundColor: "#f5f5f5",
+              }}
+            >
+              <span>{chip}</span>
+              <motion.button
+                className="close-btn"
+                onClick={() => removeChip(chip)}
+                whileHover={{ scale: 1.3, rotate: 90 }}
+                transition={{ duration: 0.2 }}
+                style={{
+                  border: "none",
+                  background: "none",
+                  cursor: "pointer",
+                  marginLeft: "5px",
+                  color: "red",
+                  fontWeight: "bold",
+                }}
+              >
+                &times;
+              </motion.button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+    </motion.div>
   );
 }
 

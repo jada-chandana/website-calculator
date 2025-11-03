@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { NavLink } from "react-router-dom";
 import seo from "../assets/seo.png";
 import OnPage from "../assets/onpage.png";
@@ -27,28 +28,71 @@ const SpecialRequirements = ({ selectedItems = {}, setSelectedItems = () => {} }
 
     const updatedSelections = alreadySelected
       ? currentSelections.filter((req) => req.name !== item.name)
-      : [...currentSelections, item]; // ✅ add full object (name + price)
+      : [...currentSelections, item];
 
     setSelectedItems({ ...selectedItems, requirements: updatedSelections });
   };
 
   return (
-    <div>
-      <h3 className="head">How much to make website</h3>
-      <h3 className="sub">Special Requirements</h3>
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      {/* Animated Headings */}
+      <motion.h3
+        className="head"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        How much to make website
+      </motion.h3>
 
-      <ul className="item">
+      <motion.h3
+        className="sub"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
+        Special Requirements
+      </motion.h3>
+
+      {/* Requirements List with Animation */}
+      <motion.ul
+        className="item"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.1 },
+          },
+        }}
+      >
         {requirements.map((req, index) => {
           const isSelected = (selectedItems.requirements || []).some(
             (r) => r.name === req.name
           );
 
           return (
-                 <li
-        key={index}
-        className="type-card"
-        onClick={() => handleSelect(req)}
-    style={{
+            <motion.li
+              key={index}
+              className="type-card"
+              onClick={() => handleSelect(req)}
+              variants={{
+                hidden: { opacity: 0, y: 20, scale: 0.9 },
+                visible: { opacity: 1, y: 0, scale: 1 },
+              }}
+               whileHover={{
+                scale: 1.05, backgroundColor: "#007bff", // 🔵 blue background on hover
+                color: "#fff", // optional – make text white
+                boxShadow: "0 4px 15px rgba(0,0,255,0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ duration: 0.3 }}
+              style={{
                 cursor: "pointer",
                 border: isSelected ? "2px solid blue" : "1px solid #ccc",
                 borderRadius: "8px",
@@ -57,22 +101,31 @@ const SpecialRequirements = ({ selectedItems = {}, setSelectedItems = () => {} }
                 display: "flex",
                 alignItems: "center",
                 gap: "10px",
+                backgroundColor: isSelected ? "#f0f8ff" : "white",
                 transition: "0.3s ease",
               }}
-      >
-              <img src={req.image} alt={req.name} className="type-image" />
+            >
+              <motion.img
+                src={req.image}
+                alt={req.name}
+                className="type-image"
+                style={{ width: "60px", height: "60px" }}
+                whileHover={{ rotate: 5 }}
+              />
               <div className="card-content">
-                <span>{req.name}</span>
-               
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.2 }}
+                >
+                  {req.name}
+                </motion.span>
               </div>
-            </li>
+            </motion.li>
           );
         })}
-      </ul>
-
-      {/* Optional navigation */}
-     
-    </div>
+      </motion.ul>
+    </motion.div>
   );
 };
 

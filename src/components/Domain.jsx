@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";
 import DomainImg from "../assets/domain.png";
 import Hostinger from "../assets/hostinger.png";
 import Email from "../assets/official_email.png";
-
 
 const domainOptions = [
   { name: "Domain", price: "1200", image: DomainImg },
@@ -11,7 +11,7 @@ const domainOptions = [
   { name: "Official Email ID", price: "1200", image: Email },
 ];
 
-const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
+const Domain = ({ selectedItems = {}, setSelectedItems = () => { } }) => {
   // ✅ Toggle multi-select domains
   const handleSelect = (item) => {
     const currentSelections = selectedItems.domain || [];
@@ -19,44 +19,37 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
       (domain) => domain.name === item.name
     );
 
-    let updatedSelections;
-    if (alreadySelected) {
-      // Deselect if clicked again
-      updatedSelections = currentSelections.filter(
-        (domain) => domain.name !== item.name
-      );
-    } else {
-      // Add to selections
-      updatedSelections = [...currentSelections, item];
-    }
+    const updatedSelections = alreadySelected
+      ? currentSelections.filter((domain) => domain.name !== item.name)
+      : [...currentSelections, item];
 
     setSelectedItems({ ...selectedItems, domain: updatedSelections });
   };
-
-  // ✅ Handle input fields for domain details
-  const handleInputChange = (index, value) => {
-    const updatedInputs = [...(selectedItems.domainInputs || [])];
-    updatedInputs[index] = value;
-    setSelectedItems({ ...selectedItems, domainInputs: updatedInputs });
-  };
-
-
 
   // ✅ Enable next only if a website type is selected
   const isTypeSelected = !!selectedItems.type;
 
   return (
     <div style={{ marginTop: "30px" }}>
-      <h3 className="sub">Domain</h3>
+      {/* Animated heading */}
+      <motion.h3
+        className="sub"
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        Domain
+      </motion.h3>
 
-      {/* Domain options with multi-select */}
+      {/* Domain options with animated cards */}
       <ul className="item" style={{ listStyle: "none", padding: 0 }}>
         {domainOptions.map((item, index) => {
           const isSelected = (selectedItems.domain || []).some(
             (domain) => domain.name === item.name
           );
+
           return (
-            <li
+            <motion.li
               key={index}
               className="type-card"
               onClick={() => handleSelect(item)}
@@ -69,8 +62,20 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
                 display: "flex",
                 alignItems: "center",
                 gap: "10px",
+                backgroundColor: isSelected ? "#f0f8ff" : "white",
                 transition: "0.3s ease",
               }}
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.05, backgroundColor: "#007bff", // 🔵 blue background on hover
+                color: "#fff",
+
+
+                boxShadow: "0 4px 15px rgba(0,0,255,0.3)",
+              }}
+              whileTap={{ scale: 0.95   }}
             >
               {item.image && (
                 <img
@@ -80,14 +85,14 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
                 />
               )}
               <div>
-                <p className="type-name">{item.name}</p>
+                <p className="type-name" style={{ fontWeight: "bold", color: "#333" }}>
+                  {item.name}
+                </p>
               </div>
-            </li>
+            </motion.li>
           );
         })}
       </ul>
-
-      
 
       {/* ✅ Next Button — enabled only when Type is selected */}
       <div className="btn" style={{ marginTop: "30px" }}>

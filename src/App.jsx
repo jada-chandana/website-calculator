@@ -22,9 +22,9 @@ function App() {
 
   return (
     <Router>
-      <div style={{ display: "flex", alignItems: "flex-start" }}>
-        {/* Main content area */}
-        <div style={{ flex: 1, padding: "20px" }}>
+     <div style={{ display: "flex", alignItems: "flex-start" }}>
+       {/* Main content area */} 
+       <div style={{ flex: 1, padding: "20px" }}>
           <Routes>
             {/* Home Page — Type + Domain */}
             <Route

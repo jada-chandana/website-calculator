@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { motion } from "framer-motion";  // 🧩 Add this import
 import Chips from "./ChipsInput";
 
 const type = [
@@ -10,72 +11,99 @@ const type = [
 ];
 
 const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
-  // Handle selection of page type
   const handleSelect = (item) => {
     setSelectedItems({ ...selectedItems, pages: item });
   };
 
-  // ✅ Get chips safely (empty array if not present)
   const selectedChips = selectedItems.chips || [];
-
-  // ✅ Enable "Next" only if either pages or chips are selected
-  const isNextEnabled = !!selectedItems.pages && selectedChips.length >0;
+  const isNextEnabled = !!selectedItems.pages && selectedChips.length > 0;
 
   return (
     <>
-      <h3 className="head">How much to make website</h3>
-      <h3 className="sub">Number of Pages</h3>
+      {/* Animated Heading */}
+      <motion.h3
+        className="head"
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        How much to make website
+      </motion.h3>
 
-      {/* ✅ Page Options */}
-      <ul className="item-grid">
-        {type.map((item, index) => (
-          <li
-            key={index}
-            onClick={() => handleSelect(item)}
-            style={{
-              cursor: "pointer",
-              border:
-                selectedItems?.pages?.name === item.name
-                  ? "2px solid #0056d2"
-                  : "1px solid #ccc",
-              borderRadius: "8px",
-              padding: "15px",
-              marginBottom: "10px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "6px",
-              backgroundColor:
-                selectedItems?.pages?.name === item.name ? "#eaf0ff" : "white",
-              transition: "all 0.3s ease",
-              textAlign: "center",
-              fontFamily: "sans-serif",
+      <div style={{ marginTop: "30px" }}>
+        <motion.h3
+          className="sub"
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Select Number of Pages
+        </motion.h3>
+
+        {/* Animated Page Options */}
+        <ul className="item-grid" style={{ listStyle: "none", padding: 0 }}>
+          {type.map((item, index) => (
+            <motion.li
+              key={index}
+              onClick={() => handleSelect(item)}
+              initial={{ opacity: 0, scale: 0.8, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{
+                scale: 1.05, backgroundColor: "#007bff", // 🔵 blue background on hover
+                color: "#fff", // optional – make text white
+                boxShadow: "0 4px 15px rgba(0,0,255,0.3)",
+              }}
+              whileTap={{ scale: 0.95 }}
+              style={{
+                cursor: "pointer",
+                border:
+                  selectedItems?.pages?.name === item.name
+                    ? "2px solid #0056d2"
+                    : "1px solid #ccc",
+                borderRadius: "8px",
+                padding: "15px",
+                marginBottom: "10px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "6px",
+                backgroundColor:
+                  selectedItems?.pages?.name === item.name
+                    ? "#eaf0ff"
+                    : "white",
+                transition: "all 0.3s ease",
+                textAlign: "center",
+                fontFamily: "sans-serif",
+              }}
+            >
+              <p className="type-name" style={{ fontWeight: "bold" }}>
+                {item.name}
+              </p>
+            </motion.li>
+          ))}
+        </ul>
+
+        {/* Chips Input Section */}
+        <Chips selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+
+        {/* Navigation Buttons */}
+        <div className="btn" style={{ marginTop: "30px" }}>
+          <NavLink className="next" to="/">
+            Previous
+          </NavLink>
+
+          <NavLink
+            to={isNextEnabled ? "/nextPages" : "#"}
+            className={`next ${!isNextEnabled ? "disabled" : ""}`}
+            onClick={(e) => {
+              if (!isNextEnabled) e.preventDefault();
             }}
           >
-            <p className="type-name">{item.name}</p>
-          </li>
-        ))}
-      </ul>
-
-      {/* ✅ Chips Input Section */}
-      <Chips selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
-
-      {/* ✅ Navigation Buttons */}
-      <div className="btn" style={{ marginTop: "30px" }}>
-        <NavLink className="next" to="/">
-          Previous
-        </NavLink>
-
-        <NavLink
-          to={isNextEnabled ? "/nextPages" : "#"}
-          className={`next ${!isNextEnabled ? "disabled" : ""}`}
-          onClick={(e) => {
-            if (!isNextEnabled) e.preventDefault();
-          }}
-        >
-          Next
-        </NavLink>
+            Next
+          </NavLink>
+        </div>
       </div>
     </>
   );

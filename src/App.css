@@ -30,6 +30,10 @@ html, body {
   z-index: 1000;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+@keyframes revealText {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
 .input{
   justify-content: space-around;
   gap:20px;
