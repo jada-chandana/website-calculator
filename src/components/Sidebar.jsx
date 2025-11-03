@@ -25,7 +25,7 @@ const Sidebar = ({ selectedItems = {} }) => {
     const limit = selectedItems.pages.limit;
     if (chipsCount > limit) {
       const extraItems = chipsCount - limit;
-      extraCharge = extraItems * 200;
+      extraCharge = extraItems * 2000;
     }
   }
 

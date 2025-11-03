@@ -11,14 +11,13 @@ import Edit from "../assets/editing.png";
 import Content from "../assets/content.png";
 
 const requirements = [
-  { name: "SEO Friendly", price: 1200, image: seo },
-  { name: "On Page SEO", price: 1200, image: OnPage },
-  { name: "Social Media Linking", price: 1200, image: Social },
-  { name: "Popup Enquiry", price: 1200, image: popup },
-  { name: "Banner Dynamic", price: 1200, image: Banner },
-  { name: "Admin Panel", price: 1200, image: Admin },
-  { name: "Edit Pages", price: 1200, image: Edit },
-  { name: "Content Writing Per Page", price: 1200, image: Content },
+  { name: "SEO Friendly", price: 2000, image: seo },
+  { name: "On Page SEO", price: 2000, image: OnPage },
+  { name: "Social Media Linking", price: 5000, image: Social },
+  { name: "Popup Enquiry", price: 1000, image: popup },
+  { name: "Banner Dynamic", price: 1000, image: Banner },
+  { name: "Admin Panel", price: 1000, image: Admin },
+  { name: "Content Writing Per Page", price: 1000, image: Content },
 ];
 
 const SpecialRequirements = ({ selectedItems = {}, setSelectedItems = () => {} }) => {

@@ -8,11 +8,11 @@ import payment from "../assets/payments.png";
 import sms from "../assets/smsApi.png";
 
 const integrationsList = [
-  { name: "Live Chatbot", price: 1200, image: chatbot },
-  { name: "Google My Business Page", price: 1200, image: Banner },
-  { name: "WhatsApp Chat", price: 1200, image: chat },
-  { name: "Payment Gateway", price: 1200, image: payment },
-  { name: "SMS API", price: 1200, image: sms },
+  { name: "Live Chatbot", price: 0, image: chatbot },
+  { name: "Google My Business Page", price: 500, image: Banner },
+  { name: "WhatsApp Chat", price: 500, image: chat },
+  { name: "Payment Integration", price: 1200, image: payment },
+
 ];
 
 const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {

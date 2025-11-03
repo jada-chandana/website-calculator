@@ -8,12 +8,12 @@ import Ecommerce from "../assets/ecommerce.png";
 import Wordpress from "../assets/wordpress.png";
 
 const typeOptions = [
-  { name: "Static", price: "1200", image: Static },
-  { name: "Dynamic", price: "1500", image: Dynamic },
-  { name: "Corporate", price: "1200", image: Corporate },
-  { name: "Portfolio", price: "1200", image: Portifolio },
-  { name: "Ecommerce", price: "1200", image: Ecommerce },
-  { name: "WordPress", price: "1200", image: Wordpress },
+  { name: "Static", price: "10000", image: Static },
+  { name: "Dynamic", price: "2500", image: Dynamic },
+  { name: "Corporate", price: "15000", image: Corporate },
+  { name: "Portfolio", price: "10000", image: Portifolio },
+  { name: "Ecommerce", price: "20000", image: Ecommerce },
+  { name: "WordPress", price: "10000", image: Wordpress },
 ];
 
 const Type = ({ selectedItems, setSelectedItems }) => {

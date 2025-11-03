@@ -6,18 +6,28 @@ import Hostinger from "../assets/hostinger.png";
 import Email from "../assets/official_email.png";
 
 const domainOptions = [
-  { name: "Domain", price: "1200", image: DomainImg },
-  { name: "Hostinger", price: "1500", image: Hostinger },
-  { name: "Official Email ID", price: "1200", image: Email },
+  { name: "Domain", price: "2000", image: DomainImg },
+  { name: "Hostinger", price: "8000", image: Hostinger },
+  { name: "Official Email ID", price: "0", image: Email },
 ];
 
-const Domain = ({ selectedItems = {}, setSelectedItems = () => { } }) => {
-  // ✅ Toggle multi-select domains
+
+
+const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
   const handleSelect = (item) => {
     const currentSelections = selectedItems.domain || [];
     const alreadySelected = currentSelections.some(
       (domain) => domain.name === item.name
     );
+
+    // ✅ If user tries to select Email ID without Hostinger
+    if (
+      item.name === "Official Email ID" &&
+      !currentSelections.some((d) => d.name === "Hostinger")
+    ) {
+      alert("⚠️ Please select Hostinger before choosing Official Email ID.");
+      return;
+    }
 
     const updatedSelections = alreadySelected
       ? currentSelections.filter((domain) => domain.name !== item.name)
@@ -26,9 +36,11 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => { } }) => {
     setSelectedItems({ ...selectedItems, domain: updatedSelections });
   };
 
-  // ✅ Enable next only if a website type is selected
   const isTypeSelected = !!selectedItems.type;
 
+  const isHostingerSelected = (selectedItems.domain || []).some(
+    (d) => d.name === "Hostinger"
+  );
   return (
     <div style={{ marginTop: "30px" }}>
       {/* Animated heading */}
