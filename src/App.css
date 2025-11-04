@@ -74,6 +74,9 @@ html, body {
   margin-top: 40px;
   flex-wrap: wrap; /* allows wrapping if screen is small */
 }
+.type-card:hover p {
+  color: white !important;
+}
 
 .grid-item {
   text-align: center;

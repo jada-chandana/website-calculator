@@ -41,6 +41,7 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
   const isHostingerSelected = (selectedItems.domain || []).some(
     (d) => d.name === "Hostinger"
   );
+  
   return (
     <div style={{ marginTop: "30px" }}>
       {/* Animated heading */}
@@ -97,9 +98,10 @@ const Domain = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
                 />
               )}
               <div>
-                <p className="type-name" style={{ fontWeight: "bold", color: "#333" }}>
+                <p style={{  fontWeight: "bold", color: "#333" }}>
                   {item.name}
                 </p>
+                <p  style={{ fontWeight: "bold", color: "#333" }}>12 Months</p>
               </div>
             </motion.li>
           );
