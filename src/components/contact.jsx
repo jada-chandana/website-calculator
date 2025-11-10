@@ -286,7 +286,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
           marginRight: "auto",
         }}
       >
-        <h3 style={{ color: "#004aad", marginBottom: "20px" }}>Contact Form</h3>
+        <h3 style={{ color: "#004aad", marginBottom: "20px" }}>Where should we send you the detailed estimate?</h3>
         <form onSubmit={handleSubmit}>
           <input
             type="text"

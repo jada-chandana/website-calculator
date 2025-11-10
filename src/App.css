@@ -586,7 +586,7 @@ input:focus {
   display: flex;
   flex-wrap: wrap; /* allows buttons to move to new lines */
   gap: 10px;
-  justify-content: center; /* center align on all screens */
+  justify-content: center ; /* center align on all screens */
   margin-top: 20px;
   /* padding: 10px; */
 }
