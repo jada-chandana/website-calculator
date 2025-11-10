@@ -190,6 +190,15 @@ import logo from "../assets/image.png";
 // ✅ Utility function to generate PDF blob
 export const generatePdfBlob = (selectedItems) => {
   const { type, domain, pages, requirements, integrations, chips } = selectedItems;
+    let extraCharge = 0;
+  if (pages && Array.isArray(chips) && pages.limit !== Infinity) {
+    const chipsCount = chips.length;
+    const limit = pages.limit;
+    if (chipsCount > limit) {
+      const extraItems = chipsCount - limit;
+      extraCharge = extraItems * 2000;
+    }
+  }
 
   const data = [
     { title: "Website Type", items: type ? [type] : [] },
@@ -199,13 +208,21 @@ export const generatePdfBlob = (selectedItems) => {
     { title: "Integrations", items: integrations || [] },
     { title: "Chips Input", items: chips || [] },
   ];
+  if (extraCharge > 0) {
+  data.push({
+    title: "Extra Charges",
+    items: [{ name: "Additional Chips beyond page limit", price: extraCharge }],
+  });
+}
 
   const getTotal = (array) =>
     !array || array.length === 0
       ? 0
       : array.reduce((acc, item) => acc + Number(item.price || 0), 0);
 
-  const grandTotal = data.reduce((acc, section) => acc + getTotal(section.items), 0);
+const grandTotal =
+  data.reduce((acc, section) => acc + getTotal(section.items), 0) + extraCharge;
+
 
   const doc = new jsPDF();
   const pageWidth = doc.internal.pageSize.getWidth();

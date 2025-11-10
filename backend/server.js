@@ -5,7 +5,12 @@ const multer = require("multer");
 const fs = require("fs");
 
 const app = express();
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",  // ✅ your React app origin
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+}));
 app.use(express.json());
 
 // 🧩 Multer setup to handle uploaded PDF
