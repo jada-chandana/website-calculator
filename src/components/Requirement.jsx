@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import "jspdf-autotable";
@@ -170,7 +170,7 @@ const RequirementsTable = ({ selectedItems = {} }) => {
 
       {/* ✅ Buttons */}
       <div style={{ marginTop: "20px" }}>
-        <button
+        <NavLink to="/contact"
           onClick={handleNext}
           style={{
             marginRight: "10px",
@@ -183,7 +183,7 @@ const RequirementsTable = ({ selectedItems = {} }) => {
           }}
         >
           Next
-        </button>
+        </NavLink>
 
         {/* Optional PDF button */}
         {/* <button

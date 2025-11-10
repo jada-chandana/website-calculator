@@ -1,3 +1,4 @@
+
 // import React, { useState } from "react";
 // import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import "./App.css";
@@ -246,7 +247,7 @@ import Pages from "./components/NumberOfPages";
 import SpecialRequirements from "./components/SpecialRequirements";
 import Integration from "./components/integrations";
 import RequirementsTable from "./components/Requirement";
-import Contact, { generatePdfBlob } from "./components/contact"; // ✅ Import the utility
+import Contact from "./components/contact"; // ✅ Import the utility
 
 function App() {
   const [selectedItems, setSelectedItems] = useState({
@@ -299,11 +300,8 @@ function App() {
                 </>
               }
             />
-            <Route
-              path="/contact"
-              element={<Contact selectedItems={selectedItems} handleDownload={handleDownload} />}
-            />
-            <Route
+           
+            {/* <Route
               path="/summary"
               element={
                 <RequirementsTable
@@ -311,8 +309,18 @@ function App() {
                   setSelectedItems={setSelectedItems}
                   handleDownload={handleDownload}
                 />
+                
               }
             />
+             <Route
+              path="/contact"
+              element={<Contact selectedItems={selectedItems} handleDownload={handleDownload} />}
+            /> */}
+         
+
+<Route path="/summary" element={< Contact  selectedItems={selectedItems}
+                  setSelectedItems={setSelectedItems}/>} />
+
           </Routes>
         </div>
         <Sidebar selectedItems={selectedItems} />
