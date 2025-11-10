@@ -224,7 +224,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
       <div ref={tableRef}>
         <table
           style={{
-            width: "100%",
+            width: "80%",
             borderCollapse: "collapse",
             marginTop: "15px",
           }}

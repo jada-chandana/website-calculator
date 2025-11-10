@@ -1,26 +1,23 @@
+/* Sidebar Base */
 .sidebar {
-  position: fixed;
-  top: 100px; /* keep below header if any */
-  left: 20px;
-  width: 320px;
-  height: 60vh; /* 🔹 increased height */
+  position: fixed;             /* stays in place even when scrolling */
+  top: 100px;                  /* adjust as needed (below header) */
+  right: 20px;                 /* right-side positioning */
+  width: 300px;
+  height: 80vh;                /* taller for better visibility */
   background-color: #0056d2;
   color: white;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease;
-  z-index: 100;
-
-  /* ✅ scrolling enabled */
-  overflow-y: auto;
-
-  /* nice scrollbar */
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2); /* shadow from left side */
+  z-index: 1000;
+  overflow-y: auto;            /* allows scrolling inside sidebar */
   scrollbar-width: thin;
   scrollbar-color: #ffffff77 transparent;
+  transition: transform 0.3s ease;
 }
 
-/* Chrome scrollbar */
+/* ✅ Scrollbar Styling for Chrome */
 .sidebar::-webkit-scrollbar {
   width: 6px;
 }
@@ -32,7 +29,7 @@
   background-color: #ffffffaa;
 }
 
-/* Sidebar content */
+/* Sidebar Headings */
 .sidebar-title {
   font-size: 18px;
   margin-bottom: 10px;
@@ -50,12 +47,12 @@
   padding-top: 10px;
 }
 
-/* ✅ Hamburger (top-right) */
+/* ✅ Hamburger (for mobile toggle) */
 .hamburger {
   display: none;
   position: fixed;
   top: 20px;
-  right: 20px;
+  right: 20px;                /* move hamburger to right */
   z-index: 1100;
   background-color: #0056d2;
   color: white;
@@ -71,7 +68,7 @@
   background-color: #003c9e;
 }
 
-/* ✅ Overlay for mobile */
+/* ✅ Overlay (for mobile background blur) */
 .overlay {
   position: fixed;
   top: 0;
@@ -79,7 +76,8 @@
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
-  z-index: 1000;
+  z-index: 999;
+  display: none;
 }
 
 /* ✅ Mobile view */
@@ -89,30 +87,31 @@
   }
 
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 280px;
-    height: 60vh; /* 🔹 increased height for mobile too */
-    transform: translateX(-100%);
+    right: 0;                   /* stick to right */
+    transform: translateX(100%); /* hide sidebar off-screen to right */
+    height: 80vh;
   }
 
   .sidebar.open {
-    transform: translateX(0);
+    transform: translateX(0);   /* slide in from right */
+  }
+
+  .overlay.show {
+    display: block;             /* show overlay when sidebar is open */
   }
 }
 
 /* ✅ Desktop view */
 @media (min-width: 901px) {
-  .sidebar {
-    position: relative;
-    margin-top: 100px;
-    margin-left: 20px;
-    height: 60vh; /* 🔹 updated from 30vh to 50vh */
-    transform: none;
-  }
-
   .hamburger {
     display: none;
+  }
+
+  .sidebar {
+    transform: none; /* always visible */
+  }
+
+  .overlay {
+    display: none;    /* hide overlay on desktop */
   }
 }
