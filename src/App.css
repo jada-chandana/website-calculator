@@ -84,6 +84,7 @@ html, body {
   transition: all 0.3s ease;
 }
 
+
 .menu-button.active {
   border: 2px solid blue;
   background-color: #eaf0ff;
@@ -204,7 +205,20 @@ html, body {
   margin-bottom: 10px;
 }
 
+
 /* === Next Button === */
+
+.btn {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  align-items: center;
+  gap: 20px; /* space between buttons */
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* === Previous & Next Buttons === */
+.prev,
 .next {
   text-decoration: none;
   background-color: blue;
@@ -212,15 +226,24 @@ html, body {
   padding: 10px 25px;
   border-radius: 8px;
   font-weight: 500;
-  transition: background-color 0.3s ease;
-  display: block;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
   width: fit-content;
-  /* margin: 40px auto; */
-  margin-right: 360px;
+  text-align: center;
 }
 
+/* === Hover Effect === */
+.prev:hover,
 .next:hover {
   background-color: darkblue;
+  transform: scale(1.05);
+}
+
+/* === Disabled State (optional for next) === */
+.next.disabled {
+  background-color: #ccc;
+  color: #666;
+  pointer-events: none;
 }
 .next.disabled {
   background-color: #ccc;
@@ -357,7 +380,7 @@ html, body {
     margin-top: 150px;
   }
   .input {
-    width: 90%;
+    width: 60%;
   }
 
   .menu {
@@ -377,7 +400,7 @@ html, body {
 {
   display: flex;
  
-  justify-content: space-between;
+  justify-content: spacetween-be;
   
   margin-left: 100px;
   text-decoration: none;
@@ -640,4 +663,276 @@ input:focus {
     font-size: 14px;
   }
 }
+/* === Navigation Buttons (Previous / Next) === */
+.btn {
+  display: flex;
+  justify-content: center;   /* centers both buttons */
+  align-items: center;
+  gap: 20px;                 /* equal spacing between buttons */
+  margin-top: 40px;
+  margin-bottom: 40px;
+  width: 100%;
+  flex-wrap: wrap;           /* allows wrapping on small screens */
+  text-align: center;
+}
 
+/* Keep your existing .next button styling */
+.next {
+  text-decoration: none;
+  background-color: #0056d2;
+  color: white;
+  padding: 12px 35px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Hover effect */
+.next:hover {
+  background-color: #003d99;
+  transform: translateY(-2px);
+}
+
+/* Disabled state */
+.next.disabled {
+  background-color: #ccc;
+  color: #666;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* === Responsive: for mobile and tablet === */
+@media (max-width: 768px) {
+  .btn {
+    flex-direction: column;  /* stack vertically */
+    gap: 15px;
+  }
+
+  .next {
+    width: 80%;
+    text-align: center;
+    font-size: 15px;
+    padding: 12px 25px;
+  }
+}
+/* === Global Reset === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-family: "Poppins", sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* === Header === */
+.head {
+  width: 100%;
+  background-color: #004aad;
+  color: white;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* === Sub Heading === */
+.sub-head {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* === Container === */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  margin: 50px auto;
+  max-width: 1100px;
+}
+
+/* === Card / Option Box === */
+.card {
+  background: white;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  width: 260px;
+  min-height: 160px;
+  text-align: center;
+  padding: 25px 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #004aad;
+}
+
+.card.selected {
+  border-color: #004aad;
+  background-color: #f1f6ff;
+}
+
+/* === Card Text === */
+.card h3 {
+  color: #004aad;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.card p {
+  color: #555;
+  font-size: 15px;
+}
+
+/* === Footer === */
+.footer {
+  width: 100%;
+  background-color: #004aad;
+  color: white;
+  text-align: center;
+  padding: 18px 10px;
+  margin-top: 40px;
+  font-size: 15px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+/* === Navigation Buttons (Previous / Next) === */
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  margin: 50px auto;
+  width: 100%;
+  max-width: 600px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.next {
+  text-decoration: none;
+  background-color: #004aad;
+  color: white;
+  padding: 14px 40px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+  display: inline-block;
+  text-align: center;
+}
+
+.next:hover {
+  background-color: #003b8b;
+  transform: translateY(-3px);
+}
+
+.next.disabled {
+  background-color: #ccc;
+  color: #666;
+  pointer-events: none;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* === Responsive: Tablets === */
+@media (max-width: 992px) {
+  .container {
+    gap: 20px;
+    max-width: 900px;
+  }
+
+  .card {
+    width: 45%;
+    min-height: 150px;
+  }
+
+  .btn {
+    gap: 20px;
+    margin: 40px auto;
+    max-width: 500px;
+  }
+
+  .next {
+    padding: 12px 32px;
+    font-size: 15px;
+  }
+}
+
+/* === Responsive: Mobiles === */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+
+  .btn {
+    flex-direction: column;
+    gap: 18px;
+    width: 60%;
+  }
+
+  .next {
+    width: 85%;
+    font-size: 15px;
+    padding: 12px 28px;
+  }
+}
+
+/* === Extra Small Devices (below 480px) === */
+@media (max-width: 480px) {
+  .head {
+    font-size: 22px;
+  }
+
+  .sub-head {
+    font-size: 17px;
+  }
+
+  .card {
+    width: 90%;
+    min-height: 140px;
+  }
+
+  .btn {
+    gap: 15px;
+    margin-top: 30px;
+  }
+
+  .next {
+    width: 60%;
+    font-size: 14px;
+    padding: 10px 22px;
+    border-radius: 8px;
+  }
+
+  .footer {
+    font-size: 14px;
+  }
+}

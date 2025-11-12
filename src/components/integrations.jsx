@@ -96,14 +96,14 @@ const Integrations = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
           })}
         </ul>
 
-        <div className="btn" style={{ textAlign: "center", marginTop: "20px" }}>
-          <NavLink className="next" to="/pages">
+        <div className="btn" style={{ textAlign: "center", marginTop: "20px", flexDirection:"row" }}>
+          <NavLink className="prev" to="/pages">
             Previous
           </NavLink>
 
           <NavLink
             to={isIntegrationSelected ? "/summary" : "#"}
-            className={`next ${!isIntegrationSelected ? "disabled" : ""}`}
+          className={`next ${!isIntegrationSelected ? "disabled" : ""}`}
             onClick={(e) => {
               if (!isIntegrationSelected) e.preventDefault();
             }}

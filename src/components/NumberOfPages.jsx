@@ -89,8 +89,8 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         <Chips selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
 
         {/* Navigation Buttons */}
-        <div className="btn" style={{ marginTop: "30px" }}>
-          <NavLink className="next" to="/">
+        <div className="btn" style={{ marginTop: "30px", direction:"flex",flexDirection:"row" }}>
+          <NavLink className="prev" to="/">
             Previous
           </NavLink>
 

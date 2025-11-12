@@ -1,8 +1,9 @@
+
 import React, { useState, useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
-import logo from "../assets/image.png";
+// import logo from "../assets/image.png"; // ✅ Not needed; use /public/logo.png instead
 
 const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) => {
   const location = useLocation();
@@ -50,7 +51,6 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
   let adjustedChips = Array.isArray(chips) ? [...chips] : [];
   let extraCharge = 0;
 
-  // ✅ Add extra charge directly to chips
   if (pages && Array.isArray(chips) && pages.limit !== Infinity) {
     const chipsCount = chips.length;
     const limit = pages.limit;
@@ -87,7 +87,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
     // Header
     doc.setFillColor(0, 74, 173);
     doc.rect(0, 0, pageWidth, 20, "F");
-    doc.addImage(logo, "PNG", 10, 0, 20, 20);
+    doc.addImage("/AspireLogo.png", "PNG", 10, 0, 20, 20);
     doc.setTextColor(255, 255, 255);
     doc.setFontSize(16);
     doc.text("ASPIRE TEKHUB SOLUTIONS", pageWidth / 2, 13, { align: "center" });
@@ -170,9 +170,18 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
     additionalRequirements: "",
   });
   const [loading, setLoading] = useState(false);
+console.log("Sending to backend...");
+console.log({
+  name: formData.name,
+  email: formData.email,
+  phone: formData.phone,
+  tableDetails: data,
+  grandTotal,
+});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!formData.name || !formData.email || !formData.phone) {
       alert("Please fill all fields!");
       return;
@@ -180,38 +189,39 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
 
     try {
       setLoading(true);
+
       const pdfBlob = generatePdfBlob();
+
       const formDataToSend = new FormData();
       formDataToSend.append("name", formData.name);
       formDataToSend.append("email", formData.email);
       formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("message", formData.additionalRequirements);
+      formDataToSend.append("message", formData.additionalRequirements || "");
+      formDataToSend.append("tableDetails", JSON.stringify(data)); // ✅ JSON string
+      formDataToSend.append("grandTotal", grandTotal); // ✅ number or string
       formDataToSend.append("pdf", pdfBlob, "Requirements_Summary.pdf");
 
-      const res = await fetch("http://localhost:5000/send-email", {
+      const response = await fetch("http://localhost:5000/send-email", {
         method: "POST",
         body: formDataToSend,
       });
-      const result = await res.json();
 
-      if (res.ok) {
-        alert("✅ Email sent successfully with attached PDF!");
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          additionalRequirements: "",
-        });
+      const result = await response.json();
+
+      if (response.ok) {
+        alert("✅ Quotation saved & email sent successfully!");
+        setFormData({ name: "", email: "", phone: "", additionalRequirements: "" });
       } else {
-        alert("❌ Failed to send email: " + result.message);
+        alert("❌ Failed: " + result.message);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("❌ Something went wrong while sending email.");
+      alert("❌ Something went wrong while sending email. Check backend & CORS.");
     } finally {
       setLoading(false);
     }
   };
+
 
   // --------------------------
   // 🔹 UI
@@ -272,7 +282,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
         </table>
       </div>
 
-      {/* Contact Form Card */}
+      {/* Contact Form */}
       <div
         style={{
           backgroundColor: "white",
@@ -286,7 +296,9 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
           marginRight: "auto",
         }}
       >
-        <h3 style={{ color: "#004aad", marginBottom: "20px" }}>Where should we send you the detailed estimate?</h3>
+        <h3 style={{ color: "#004aad", marginBottom: "20px" }}>
+          Where should we send you the detailed estimate?
+        </h3>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -359,7 +371,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
                 fontWeight: "bold",
               }}
             >
-              {loading ? "Sending..." : "Send Email"}
+              {loading ? "Sending..." : "Send Quotation"}
             </button>
           </div>
         </form>
