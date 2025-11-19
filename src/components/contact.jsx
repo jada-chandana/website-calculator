@@ -234,7 +234,7 @@ console.log({
       <div ref={tableRef}>
         <table
           style={{
-            width: "80%",
+            width: "70%",
             borderCollapse: "collapse",
             marginTop: "15px",
           }}
@@ -284,7 +284,7 @@ console.log({
 
       {/* Contact Form */}
       <div
-        style={{
+        {/* style={{
           backgroundColor: "white",
           marginTop: "40px",
           padding: "30px",
@@ -293,7 +293,18 @@ console.log({
           textAlign: "center",
           width: "70%",
           marginLeft: "auto",
-          marginRight: "auto",
+          marginRight: "auto", */}
+      width: "70%",
+            borderCollapse: "collapse",
+            marginTop: "15px",
+            backgroundColor: "white",
+          marginTop: "40px",
+          borderRadius: "10px",
+          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+          paddingLeft:"10px",
+          paddingRight:"10px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
         }}
       >
         <h3 style={{ color: "#004aad", marginBottom: "20px" }}>
