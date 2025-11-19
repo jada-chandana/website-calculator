@@ -290,7 +290,6 @@ console.log({
 
       {/* Contact Form */}
       <div
-<<<<<<< HEAD
         style={{
           // backgroundColor: "white",
           // marginTop: "40px",
@@ -305,27 +304,9 @@ console.log({
             borderCollapse: "collapse",
             marginTop: "15px",
             backgroundColor: "white",
-=======
-        {/* style={{
-          backgroundColor: "white",
->>>>>>> 65f01cc84c9d7b481f5bb0f052abff31bde63f9b
           marginTop: "40px",
           borderRadius: "10px",
           boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-<<<<<<< HEAD
-=======
-          textAlign: "center",
-          width: "70%",
-          marginLeft: "auto",
-          marginRight: "auto", */}
-      width: "70%",
-            borderCollapse: "collapse",
-            marginTop: "15px",
-            backgroundColor: "white",
-          marginTop: "40px",
-          borderRadius: "10px",
-          boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
->>>>>>> 65f01cc84c9d7b481f5bb0f052abff31bde63f9b
           paddingLeft:"10px",
           paddingRight:"10px",
           paddingTop:"10px",
