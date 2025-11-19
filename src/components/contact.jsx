@@ -13,6 +13,8 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
 
   const tableRef = useRef();
 
+
+                                                                         
   // ✅ Sync sidebar updates
   useEffect(() => {
     if (propSelectedItems) setSelectedItems(propSelectedItems);
@@ -186,7 +188,11 @@ console.log({
       alert("Please fill all fields!");
       return;
     }
-
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(formData.phone)) {
+    alert("Phone number must be exactly 10 digits");
+    return;
+  }
     try {
       setLoading(true);
 
@@ -234,7 +240,7 @@ console.log({
       <div ref={tableRef}>
         <table
           style={{
-            width: "80%",
+            width: "70%",
             borderCollapse: "collapse",
             marginTop: "15px",
           }}
@@ -285,15 +291,26 @@ console.log({
       {/* Contact Form */}
       <div
         style={{
-          backgroundColor: "white",
+          // backgroundColor: "white",
+          // marginTop: "40px",
+          // padding: "30px",
+          // borderRadius: "10px",
+          // boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+          // textAlign: "center",
+          // width: "70%",
+          // marginLeft: "auto",
+          // marginRight: "auto",
+           width: "70%",
+            borderCollapse: "collapse",
+            marginTop: "15px",
+            backgroundColor: "white",
           marginTop: "40px",
-          padding: "30px",
           borderRadius: "10px",
           boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-          textAlign: "center",
-          width: "70%",
-          marginLeft: "auto",
-          marginRight: "auto",
+          paddingLeft:"10px",
+          paddingRight:"10px",
+          paddingTop:"10px",
+          paddingBottom:"10px",
         }}
       >
         <h3 style={{ color: "#004aad", marginBottom: "20px" }}>

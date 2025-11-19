@@ -15,6 +15,11 @@ const RequirementsTable = ({ selectedItems = {} }) => {
     if (!array || array.length === 0) return 0;
     return array.reduce((acc, item) => acc + Number(item.price || 0), 0);
   };
+  if (!/^[0-9]{10}$/.test(phone)) {
+  alert("Phone number must be exactly 10 digits");
+  return;
+}
+
 
   // ✅ Organized data
   const data = [
