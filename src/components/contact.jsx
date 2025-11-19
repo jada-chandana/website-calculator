@@ -291,18 +291,9 @@ console.log({
       {/* Contact Form */}
       <div
         style={{
-          // backgroundColor: "white",
-          // marginTop: "40px",
-          // padding: "30px",
-          // borderRadius: "10px",
-          // boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-          // textAlign: "center",
-          // width: "70%",
-          // marginLeft: "auto",
-          // marginRight: "auto",
+       
            width: "70%",
             borderCollapse: "collapse",
-            marginTop: "15px",
             backgroundColor: "white",
           marginTop: "40px",
           borderRadius: "10px",
