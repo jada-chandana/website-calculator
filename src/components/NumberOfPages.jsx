@@ -30,7 +30,7 @@ const Pages = ({ selectedItems = {}, setSelectedItems = () => {} }) => {
         How much to make website
       </motion.h3>
 
-      <div style={{ marginTop: "30px" }}>
+      <div style={{ marginTop: "250px" }}>
         <motion.h3
           className="sub"
           initial={{ opacity: 0, x: -30 }}
