@@ -181,52 +181,62 @@ console.log({
   grandTotal,
 });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formData.name || !formData.email || !formData.phone) {
-      alert("Please fill all fields!");
-      return;
-    }
-  const phoneRegex = /^[0-9]{10}$/;
-  if (!phoneRegex.test(formData.phone)) {
-    alert("Phone number must be exactly 10 digits");
+  if (!formData.name || !formData.email || !formData.phone) {
+    alert("⚠️ Please fill all required fields");
     return;
   }
+
+  const phoneRegex = /^[0-9]{10}$/;
+  if (!phoneRegex.test(formData.phone)) {
+    alert("⚠️ Phone number must be exactly 10 digits");
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    const pdfBlob = generatePdfBlob();
+
+    const formDataToSend = new FormData();
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("email", formData.email);
+    formDataToSend.append("phone", formData.phone);
+    formDataToSend.append("message", formData.additionalRequirements || "");
+    formDataToSend.append("tableDetails", JSON.stringify(data));
+    formDataToSend.append("grandTotal", grandTotal);
+    formDataToSend.append("pdf", pdfBlob, "Requirements_Summary.pdf");
+
+    const response = await fetch("https://app.aspireths.com/send-email", {
+      method: "POST",
+      body: formDataToSend,
+    });
+
+    let result;
+
     try {
-      setLoading(true);
-
-      const pdfBlob = generatePdfBlob();
-
-      const formDataToSend = new FormData();
-      formDataToSend.append("name", formData.name);
-      formDataToSend.append("email", formData.email);
-      formDataToSend.append("phone", formData.phone);
-      formDataToSend.append("message", formData.additionalRequirements || "");
-      formDataToSend.append("tableDetails", JSON.stringify(data)); // ✅ JSON string
-      formDataToSend.append("grandTotal", grandTotal); // ✅ number or string
-      formDataToSend.append("pdf", pdfBlob, "Requirements_Summary.pdf");
-
-      const response = await fetch("http://localhost:5000/send-email", {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        alert("✅ Quotation saved & email sent successfully!");
-        setFormData({ name: "", email: "", phone: "", additionalRequirements: "" });
-      } else {
-        alert("❌ Failed: " + result.message);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("❌ Something went wrong while sending email. Check backend & CORS.");
-    } finally {
-      setLoading(false);
+      result = await response.json();
+    } catch (err) {
+      alert("❌ Server error: Response was not valid JSON");
+      return;
     }
-  };
+
+    if (!response.ok) {
+      alert("❌ Email failed: " + (result.message || "Unknown error"));
+      return;
+    }
+
+    alert("✅ Quotation saved & email sent successfully!");
+    setFormData({ name: "", email: "", phone: "", additionalRequirements: "" });
+  } catch (error) {
+    alert("❌ Network / server error: " + error.message);
+  } finally {
+    setLoading(false);
+  }
+};
+
 
 
   // --------------------------
