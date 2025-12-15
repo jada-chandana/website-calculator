@@ -220,7 +220,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
       formDataToSend.append("grandTotal", grandTotal);
       formDataToSend.append("pdf", pdfBlob, "Requirements_Summary.pdf");
 
-      const response = await fetch("http://localhost:5000/send-email", {
+      const response = await fetch("https://app.aspireths.com/send-email", {
         method: "POST",
         body: formDataToSend,
       });
