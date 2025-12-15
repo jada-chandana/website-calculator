@@ -123,18 +123,36 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
     ]);
 
     autoTable(doc, {
-      startY: 45,
-      head: [["Category", "Selected Items", "Price (Rs.)"]],
-      body: tableBody,
-      theme: "grid",
-      styles: { fontSize: 10, cellPadding: 5 },
-      headStyles: { fillColor: [0, 74, 173], textColor: 255, halign: "center" },
-      columnStyles: {
-        0: { cellWidth: 50 ,textColor: 0},
-        1: { cellWidth: 90,textColor: 0 },
-        2: { cellWidth: 40, halign: "right" ,textColor: 0},
-      },
-    });
+  startY: 45,
+
+  // ⭐ ADD MARGINS (prevents overflow warning)
+  margin: { left: 14, right: 14 },
+
+  head: [["Category", "Selected Items", "Price (Rs.)"]],
+  body: tableBody,
+  theme: "grid",
+
+  // ⭐ ALLOW TEXT WRAPPING
+  styles: {
+    fontSize: 10,
+    cellPadding: 5,
+    overflow: "linebreak",
+  },
+
+  headStyles: {
+    fillColor: [0, 74, 173],
+    textColor: 255,
+    halign: "center",
+  },
+
+  // ⭐ ONLY WIDTH ADJUSTMENT (TOTAL FITS PAGE)
+  columnStyles: {
+    0: { cellWidth: 45, textColor: 0 },   // was 50
+    1: { cellWidth: "auto", textColor: 0 }, // was 90
+    2: { cellWidth: 35, halign: "right", textColor: 0 }, // was 40
+  },
+});
+
 
     // ⭐ --------------------------
     // ⭐ NOTE SECTION BELOW TABLE
