@@ -124,32 +124,21 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
 
     autoTable(doc, {
   startY: 45,
-
-  // ⭐ ADD MARGINS (prevents overflow warning)
-  margin: { left: 14, right: 14 },
-
   head: [["Category", "Selected Items", "Price (Rs.)"]],
   body: tableBody,
   theme: "grid",
-
-  // ⭐ ALLOW TEXT WRAPPING
   styles: {
     fontSize: 10,
     cellPadding: 5,
     overflow: "linebreak",
   },
-
   headStyles: {
     fillColor: [0, 74, 173],
     textColor: 255,
     halign: "center",
   },
-
-  // ⭐ ONLY WIDTH ADJUSTMENT (TOTAL FITS PAGE)
   columnStyles: {
-    0: { cellWidth: 45, textColor: 0 },   // was 50
-    1: { cellWidth: "auto", textColor: 0 }, // was 90
-    2: { cellWidth: 35, halign: "right", textColor: 0 }, // was 40
+    2: { halign: "right" }, // only align price column
   },
 });
 
@@ -236,7 +225,7 @@ const RequirementsSummaryWithContact = ({ selectedItems: propSelectedItems }) =>
       formDataToSend.append("message", formData.additionalRequirements || "");
       formDataToSend.append("tableDetails", JSON.stringify(data));
       formDataToSend.append("grandTotal", grandTotal);
-      formDataToSend.append("pdf", pdfBlob, "Requirements_Summary.pdf");
+      formDataToSend.append("file", pdfBlob, "Requirements_Summary.pdf");
 
       const response = await fetch("https://app.aspireths.com/send-email", {
         method: "POST",
