@@ -32,8 +32,7 @@ const Type = ({ selectedItems, setSelectedItems }) => {
              className="sub"
              initial={{ opacity: 0, y: -30 }}
              animate={{ opacity: 1, y: 0 }}
-             transiti
-             on={{ duration: 0.6, ease: "easeOut" }}
+             transition={{ duration: 0.6, ease: "easeOut" }}
            >
              Type
            </motion.h3>
