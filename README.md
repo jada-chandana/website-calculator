@@ -1,120 +1,121 @@
+# Website Cost Calculator
 
-Website Cost Calculator
+A **Website Cost Calculator** is a full‑stack web application that helps users estimate the cost of building a website based on selected features, platforms, and requirements. It provides instant pricing insights for clients, developers, and businesses, making project planning faster and more transparent.
 
-A Website Cost Calculator is a web application that helps users estimate the cost of building a website based on selected features, platforms, and requirements. It provides instant pricing insights for clients, developers, and businesses.
- 🚀 Features
+---
+
+## 🚀 Features
+
 * 📱 Platform selection (Web, Mobile, Both)
 * 🎨 UI complexity options (Basic, Standard, Advanced)
-* 👥 User roles & admin panels
-* 🔐 Security & authentication options
-* 🔌 API & third‑party integrations
-* 📊 Dynamic cost calculation
-* 📄 Download or email cost summary (PDF/Excel)
-* ⚡ Real‑time updates
- 🛠️ Tech Stack
+* 👥 User roles and admin panel support
+* 🔐 Security and authentication options
+* 🔌 API and third‑party integrations
+* 📊 Dynamic, real‑time cost calculation
+* 📄 Download or email cost summary (PDF / Excel)
+* ⚡ Instant updates based on user selections
 
- Frontend
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
 * React.js
-* CSS 
+* CSS
 * Axios
-* jsPDF / html2canvas (for PDF generation)
-Backend
+* jsPDF & jsPDF‑AutoTable (PDF generation)
+* html2canvas
+* react-router-dom
+
+### Backend
+
 * Node.js
 * Express.js
 * MySQL
 * Nodemailer (email service)
-
- 📦 Installation
-
- 1️⃣ Clone the repository
-bash
-git clone https://github.com/your-username/website-cost-calculator.git
-cd website-cost-calculator
-
- 2️⃣ Install dependencies
-Dependency	Purpose
-express	Backend framework to build REST APIs
-Mysql2    	Database connection in node.js
-cors	Allows frontend to communicate with backend
-dotenv	Manages environment variables securely
-nodemailer    nodemailer for sending mails
-axios               axios is a JavaScript dependency used to send HTTP requests from the frontend to the                               backend and handle API responses efficiently.
-React-roter-dom      it is a frontend library for page navigation
-•  jsPDF                  generates PDF files in the browser.
-•  autoTable         plugin for creating tables inside PDFs.
-
-Frontend
-
-bash
-cd client
-npm install
-npm start
-
-Backend
-bash
-cd server
-npm install
-npm run dev
-
- ⚙️ Environment Variables
-
-Create a `.env` file in the backend folder:
-
-```env
-PORT=port_number
-DB_HOST=Host_name
-DB_USER=user_name
-DB_PASSWORD=your_password
-DB_NAME=DB_name
-EMAIL_USER=your_email@gmail.com
-EMAIL_PASS=your_email_password
-
-
- 📊 How It Works
-
-1. User selects website requirements
-2. Application calculates cost dynamically
-3. Final cost breakdown is displayed
-4. User will receive the mail with pdf
-
- 📁 Project Structure
-
-website-cost-calculator/
-│
-├── client/        # React frontend
-├── server/        # Node + Express backend
-├── README.md
-└── package.json
-```
-
-
- 🌐 Live Demo
-
-🔗 https://website-calculator-gold.vercel.app/
-
-🤝 Contributing
-
-Contributions are welcome!
-
-1. Fork the repository
-2. Create a new branch (`feature/new-feature`)
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
+* dotenv
+* cors
 
 ---
 
- 📄 License
+## 📦 Installation
 
-This project is licensed under the **MIT License**.
+### 1️⃣ Clone the Repository
 
+```bash
+git clone https://github.com/your-username/website-cost-calculator.git
+cd website-cost-calculator
+```
 
- 👨‍💻 Author
+---
 
-Developed by **Chandana jada **
-📧 Email: chandanaj405@gmal.com
-🌐 GitHub: https://github.com/jada-chandana/
+### 2️⃣ Install Dependencies
 
+#### Backend Dependencies
 
+| Dependency | Purpose                                  |
+| ---------- | ---------------------------------------- |
+| express    | Backend framework for building REST APIs |
+| mysql2     | MySQL database connectivity              |
+| cors       | Enables cross‑origin requests            |
+| dotenv     | Secure environment variable management   |
+| nodemailer | Sends emails with cost summaries         |
 
+#### Frontend Dependencies
+
+| Dependency       | Purpose                                            |
+| ---------------- | -------------------------------------------------- |
+| axios            | Handles HTTP requests between frontend and backend |
+| react-router-dom | Client‑side routing                                |
+| jsPDF            | Generates PDF files in the browser                 |
+| jspdf-autotable  | Creates tables inside PDFs                         |
+
+---
+
+## ▶️ Run the Application
+
+### Frontend
+
+```bash
+cd client
+npm install
+npm start
+```
+
+### Backend
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create a `.env` file inside the **server** folder and configure the following:
+
+```env
+PORT=your_port_number
+DB_HOST=your_database_host
+DB_USER=your_database_user
+DB_PASSWORD=your_database_password
+DB_NAME=your_database_name
+EMAIL_USER=your_email_id
+EMAIL_PASS=your_email_password
+```
+
+---
+
+## 🌐 GitHub
+
+🔗 **Profile:** [https://github.com/jada-chandana/](https://github.com/jada-chandana/)
+
+---
+
+## 📌 Summary
+
+The Website Cost Calculator simplifies project estimation by allowing users to customize features and instantly view pricing details. Built using the MERN‑style architecture with MySQL, it demonstrates strong frontend‑backend integration, real‑time calculations, and document generation capabilities.
 
